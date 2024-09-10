@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro"
+       xmlns:ietf-network-topology="urn:ietf:params:xml:ns:yang:ietf-network-topology"
+       xmlns:device-layer="urn:ietf:params:xml:ns:yang:device-layer"
+       xmlns:network-layer="urn:ietf:params:xml:ns:yang:network-layer"
+       name="cat6">
+
+    <xacro:property name="cat6_yaml_file" value="$(find interface_description)/config/cat6.yaml" />
+    <xacro:property name="cat6_props" value="${xacro.load_yaml(cat6_yaml_file)}"/>
+    <xacro:property name="cat6_type" value="${cat6_props['wired-connection']['type']}"/>
+    <xacro:property name="cat6_length" value="${cat6_props['wired-connection']['length']}"/>
+    <xacro:property name="cat6_bandwidth" value="${cat6_props['wired-connection']['bandwidth']}"/>
+    <xacro:property name="cat6_jitter" value="${cat6_props['wired-connection']['jitter']}"/>
+    <xacro:property name="cat6_packet_loss" value="${cat6_props['wired-connection']['packet-loss']}"/>
+    <xacro:property name="cat6_reliability" value="${cat6_props['wired-connection']['reliability']}"/>
+    <xacro:property name="cat6_availability" value="${cat6_props['wired-connection']['availability']}"/>
+    <xacro:property name="cat6_qos_level" value="${cat6_props['wired-connection']['qos-level']}"/>
+    <xacro:property name="cat6_energy_efficiency" value="${cat6_props['wired-connection']['energy-efficiency']}"/>
+    <xacro:property name="cat6_compatibility" value="${cat6_props['wired-connection']['compatibility']}"/>
+    <xacro:property name="cat6_cost" value="${cat6_props['wired-connection']['cost']}"/>
+    <xacro:property name="cat6_scalability" value="${cat6_props['wired-connection']['scalability']}"/>
+    <xacro:property name="cat6_security_level" value="${cat6_props['wired-connection']['security-level']}"/>
+
+    <xacro:macro name="cat6" params="parent L2_network_id L1_network_id L2_id:=cat6_L2 L1_id:=cat6_L1">
+
+        <joint name="cat6_joint" type="fixed">
+            <origin xyz="-1 1 0" rpy="0 0 0" />
+            <parent link="${parent}"/>
+            <child link="cat6_link"/>
+        </joint>
+
+        <link name="cat6_link">
+            <visual>
+                <origin rpy="0 0 0" xyz="0 0 0"/>
+                <geometry>
+                <mesh filename="package://interface_description/meshes/rj45_female.stl" scale="0.001 0.001 0.001"/>
+                </geometry>
+                <material name="LightGrey">
+                <color rgba="0.7 0.7 0.7 1.0"/>
+                </material>
+            </visual>
+
+            <collision>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <geometry>
+                <mesh filename="package://interface_description/meshes/rj45_female.stl" scale="0.001 0.001 0.001"/>
+                </geometry>
+            </collision>
+        </link>
+    </xacro:macro>
+
+    <xacro:macro name="cat6_L2" params="id supporting_network supporting_node supporting_tp">
+        <ietf-network-topology:termination-point>
+            <tp-id>${id}</tp-id>
+            <supporting-termination-point>
+                <network-ref>${supporting_network}</network-ref>
+                <node-ref>${supporting_node}</node-ref>
+                <tp-ref>${supporting_tp}</tp-ref>
+            </supporting-termination-point>
+            <network-layer:network-layer-termination-point-attributes>
+                <tp-type>${cat6_type}</tp-type>
+                <bandwidth>${cat6_bandwidth}</bandwidth>
+                <jitter>${cat6_jitter}</jitter>
+                <packet_loss>${cat6_packet_loss}</packet_loss>
+                <reliability>${cat6_reliability}</reliability>
+                <cost>${cat6_cost}</cost>
+            </network-layer:network-layer-termination-point-attributes>
+        </ietf-network-topology:termination-point>
+    </xacro:macro>
+
+    <xacro:macro name="cat6_L1" params="id connector_type connector_format">
+        <ietf-network-topology:termination-point>
+            <tp-id>${id}</tp-id>
+            <device-layer:device-layer-termination-point-attributes>
+                <connector-type>${connector_type}</connector-type>
+                <connector-format>${connector_format}</connector-format>
+            </device-layer:device-layer-termination-point-attributes>
+        </ietf-network-topology:termination-point>
+    </xacro:macro>
+
+</robot>

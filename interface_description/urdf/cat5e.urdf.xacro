@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro"
+       xmlns:ietf-network-topology="urn:ietf:params:xml:ns:yang:ietf-network-topology"
+       xmlns:device-layer="urn:ietf:params:xml:ns:yang:device-layer"
+       xmlns:network-layer="urn:ietf:params:xml:ns:yang:network-layer"
+       name="cat5e">
+
+    <xacro:property name="cat5e_yaml_file" value="$(find interface_description)/config/cat5e.yaml" />
+    <xacro:property name="cat5e_props" value="${xacro.load_yaml(cat5e_yaml_file)}"/>
+    <xacro:property name="cat5e_type" value="${cat5e_props['wired-connection']['type']}"/>
+    <xacro:property name="cat5e_length" value="${cat5e_props['wired-connection']['length']}"/>
+    <xacro:property name="cat5e_bandwidth" value="${cat5e_props['wired-connection']['bandwidth']}"/>
+    <xacro:property name="cat5e_jitter" value="${cat5e_props['wired-connection']['jitter']}"/>
+    <xacro:property name="cat5e_packet_loss" value="${cat5e_props['wired-connection']['packet-loss']}"/>
+    <xacro:property name="cat5e_reliability" value="${cat5e_props['wired-connection']['reliability']}"/>
+    <xacro:property name="cat5e_availability" value="${cat5e_props['wired-connection']['availability']}"/>
+    <xacro:property name="cat5e_qos_level" value="${cat5e_props['wired-connection']['qos-level']}"/>
+    <xacro:property name="cat5e_energy_efficiency" value="${cat5e_props['wired-connection']['energy-efficiency']}"/>
+    <xacro:property name="cat5e_compatibility" value="${cat5e_props['wired-connection']['compatibility']}"/>
+    <xacro:property name="cat5e_cost" value="${cat5e_props['wired-connection']['cost']}"/>
+    <xacro:property name="cat5e_scalability" value="${cat5e_props['wired-connection']['scalability']}"/>
+    <xacro:property name="cat5e_security_level" value="${cat5e_props['wired-connection']['security-level']}"/>
+
+    <xacro:macro name="cat5e" params="parent L2_network_id L1_network_id L2_id:=cat5e_L2 L1_id:=cat5e_L1">
+
+        <joint name="cat5e_joint" type="fixed">
+            <origin xyz="-1 1 0" rpy="0 0 0" />
+            <parent link="${parent}"/>
+            <child link="cat5e_link"/>
+        </joint>
+
+        <link name="cat5e_link">
+            <visual>
+                <origin rpy="0 0 0" xyz="0 0 0"/>
+                <geometry>
+                <mesh filename="package://interface_description/meshes/rj45_female.stl" scale="0.001 0.001 0.001"/>
+                </geometry>
+                <material name="LightGrey">
+                <color rgba="0.7 0.7 0.7 1.0"/>
+                </material>
+            </visual>
+
+            <collision>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <geometry>
+                <mesh filename="package://interface_description/meshes/rj45_female.stl" scale="0.001 0.001 0.001"/>
+                </geometry>
+            </collision>
+        </link>
+    </xacro:macro>
+
+    <xacro:macro name="cat5e_L2" params="id supporting_network supporting_node supporting_tp">
+        <ietf-network-topology:termination-point>
+            <tp-id>${id}</tp-id>
+            <supporting-termination-point>
+                <network-ref>${supporting_network}</network-ref>
+                <node-ref>${supporting_node}</node-ref>
+                <tp-ref>${supporting_tp}</tp-ref>
+            </supporting-termination-point>
+            <network-layer:network-layer-termination-point-attributes>
+                <tp-type>${cat5e_type}</tp-type>
+                <bandwidth>${cat5e_bandwidth}</bandwidth>
+                <jitter>${cat5e_jitter}</jitter>
+                <packet_loss>${cat5e_packet_loss}</packet_loss>
+                <reliability>${cat5e_reliability}</reliability>
+                <cost>${cat5e_cost}</cost>
+            </network-layer:network-layer-termination-point-attributes>
+        </ietf-network-topology:termination-point>
+    </xacro:macro>
+
+    <xacro:macro name="cat5e_L1" params="id connector_type connector_format">
+        <ietf-network-topology:termination-point>
+            <tp-id>${id}</tp-id>
+            <device-layer:device-layer-termination-point-attributes>
+                <connector-type>${connector_type}</connector-type>
+                <connector-format>${connector_format}</connector-format>
+            </device-layer:device-layer-termination-point-attributes>
+        </ietf-network-topology:termination-point>
+    </xacro:macro>
+
+</robot>

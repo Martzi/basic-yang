@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<robot name="example-configuration"
+      xmlns:xacro="http://wiki.ros.org/xacro" 
+      xmlns:ietf-network="urn:ietf:params:xml:ns:yang:ietf-network"
+      xmlns:ietf-network-topology="urn:ietf:params:xml:ns:yang:ietf-network-topology"
+      xmlns:device-layer="urn:ietf:params:xml:ns:yang:device-layer"
+      xmlns:network-layer="urn:ietf:params:xml:ns:yang:network-layer"
+      xmlns:application-layer="urn:ietf:params:xml:ns:yang:application-layer">
+
+
+    <link name="world" />
+
+    <!-- import nuc -->
+    <xacro:include filename="$(find nuc_description)/urdf/nuc.urdf.xacro" />
+
+    <!-- import d455 camera -->
+    <xacro:include filename="$(find realsense2_description)/urdf/_d455.urdf.xacro" />
+
+
+    <xacro:sensor_d455 parent="world">
+        <origin xyz="-0.022 -0.039 -0.01" rpy="0 1.57 0" />
+    </xacro:sensor_d455>
+
+    <xacro:nuc parent="world" id="0" />
+
+</robot>

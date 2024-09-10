@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro"
+       xmlns:ietf-network-topology="urn:ietf:params:xml:ns:yang:ietf-network-topology"
+       xmlns:device-layer="urn:ietf:params:xml:ns:yang:device-layer"
+       xmlns:network-layer="urn:ietf:params:xml:ns:yang:network-layer"
+       name="usb20">
+
+    <xacro:property name="usb20_yaml_file" value="$(find interface_description)/config/usb20.yaml" />
+    <xacro:property name="usb20_props" value="${xacro.load_yaml(usb20_yaml_file)}"/>
+    <xacro:property name="usb20_type" value="${usb20_props['wired-connection']['type']}"/>
+    <xacro:property name="usb20_length" value="${usb20_props['wired-connection']['length']}"/>
+    <xacro:property name="usb20_bandwidth" value="${usb20_props['wired-connection']['bandwidth']}"/>
+    <xacro:property name="usb20_jitter" value="${usb20_props['wired-connection']['jitter']}"/>
+    <xacro:property name="usb20_packet_loss" value="${usb20_props['wired-connection']['packet-loss']}"/>
+    <xacro:property name="usb20_reliability" value="${usb20_props['wired-connection']['reliability']}"/>
+    <xacro:property name="usb20_availability" value="${usb20_props['wired-connection']['availability']}"/>
+    <xacro:property name="usb20_qos_level" value="${usb20_props['wired-connection']['qos-level']}"/>
+    <xacro:property name="usb20_energy_efficiency" value="${usb20_props['wired-connection']['energy-efficiency']}"/>
+    <xacro:property name="usb20_compatibility" value="${usb20_props['wired-connection']['compatibility']}"/>
+    <xacro:property name="usb20_cost" value="${usb20_props['wired-connection']['cost']}"/>
+    <xacro:property name="usb20_scalability" value="${usb20_props['wired-connection']['scalability']}"/>
+    <xacro:property name="usb20_security_level" value="${usb20_props['wired-connection']['security-level']}"/>
+
+    <xacro:macro name="usb20_L2" params="id supporting_network supporting_node supporting_tp">
+        <ietf-network-topology:termination-point>
+            <tp-id>${id}</tp-id>
+            <supporting-termination-point>
+                <network-ref>${supporting_network}</network-ref>
+                <node-ref>${supporting_node}</node-ref>
+                <tp-ref>${supporting_tp}</tp-ref>
+            </supporting-termination-point>
+            <network-layer:network-layer-termination-point-attributes>
+                <tp-type>${usb20_type}</tp-type>
+                <bandwidth>${usb20_bandwidth}</bandwidth>
+                <jitter>${usb20_jitter}</jitter>
+                <packet_loss>${usb20_packet_loss}</packet_loss>
+                <reliability>${usb20_reliability}</reliability>
+                <cost>${usb20_cost}</cost>
+            </network-layer:network-layer-termination-point-attributes>
+        </ietf-network-topology:termination-point>
+    </xacro:macro>
+
+    <xacro:macro name="usb20_L1" params="id connector_type connector_format">
+        <ietf-network-topology:termination-point>
+            <tp-id>${id}</tp-id>
+            <device-layer:device-layer-termination-point-attributes>
+                <connector-type>${connector_type}</connector-type>
+                <connector-format>${connector_format}</connector-format>
+            </device-layer:device-layer-termination-point-attributes>
+        </ietf-network-topology:termination-point>
+    </xacro:macro>
+
+</robot>
