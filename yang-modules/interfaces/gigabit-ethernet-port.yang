@@ -25,7 +25,7 @@ module gigabit-ethernet-port {
     description "Initial revision.";
   }
 
-  augment "/nw:networks/nw:network/nw:node/nt:termination-point/dl:device-layer-termination-point-attributes/dl:port-type/eth:ethernet-port" {
+  augment "/nw:networks/nw:network/nw:node/nt:termination-point/dl:device-layer-termination-point-attributes/eth:ethernet-port" {
     when "eth:speed = '1Gbps'";
     description "Gigabit Ethernet (1000BASE-T) specific attributes";
 

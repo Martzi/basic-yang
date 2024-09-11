@@ -21,8 +21,7 @@ module ethernet-port {
     description "Initial revision.";
   }
 
-  // Ezzel adom hozzá egy magasabb modulhoz ezt a kiterjesztést!
-  augment "/nw:networks/nw:network/nw:node/nt:termination-point/dl:device-layer-termination-point-attributes/dl:port-type"{
+  augment "/nw:networks/nw:network/nw:node/nt:termination-point/dl:device-layer-termination-point-attributes"{
     when "/nw:networks/nw:network/nw:network-types/dl:device-layer-topology" {
     }
     description

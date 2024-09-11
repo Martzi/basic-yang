@@ -43,7 +43,6 @@
       </nl:network-layer-node-attributes>
     </node>
     <dl:device-layer-topology xmlns:dl="urn:ietf:params:xml:ns:yang:device-layer">
-      <dl:element>element2</dl:element>
     </dl:device-layer-topology>
     
     

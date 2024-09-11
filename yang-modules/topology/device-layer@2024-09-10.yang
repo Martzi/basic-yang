@@ -62,7 +62,6 @@ module device-layer {
     }
 
     augment "/nw:networks/nw:network/nw:node" {
-        // when "../dl:device-layer-topology" {
         when "/nw:networks/nw:network/nw:network-types/dl:device-layer-topology" {
         }
         description
@@ -70,21 +69,32 @@ module device-layer {
         container device-layer-node-attributes {
             description
                 "Contains node (physical device) attributes.";
-            
             leaf device-name {
                 type string;
                 description
                     "Name of the device.";
             }
-            container device-type {
-                // type leafref{
-                    // path "/nw:networks/nw:network/nw:node/nw:device-type";
-                description
-                    "Serves as augmentation target";
+            leaf device-type {
+                type enumeration{
+                    enum pc;
+                    enum router;
+                    enum switch;
+                    enum rpi4;
+                    enum modem;
+                    enum radiodot;
+                    enum flightrack;
+                    enum generic;
+                    enum robot-arm;
+                    enum controlbox;
+                    enum camera;
+                // require-instance true;
                 }
-                
+                description
+                    "Used to reference a type of device -- for example, an specific
+                    component with custom options.";
             }
         }
+    }
     
 
     augment "/nw:networks/nw:network/nw:node/nt:termination-point" {
@@ -102,20 +112,18 @@ module device-layer {
                 description
                   "Name of physical port connector. ";
             }
-            container port-type {
-            // leaf port-type {
-                // type enumeration{
-                //     enum radio;
-                //     enum rj45;
-                //     enum usb-micro;
-                //     enum usb-a-20;
-                //     enum usb-a-30;
-                //     enum usb-c;
-                //     enum generic;
-                // }
+            leaf port-type {
+                type enumeration{
+                    enum radio;
+                    enum rj45;
+                    enum usb-micro;
+                    enum usb-a-20;
+                    enum usb-a-30;
+                    enum usb-c;
+                    enum generic;
+                }
                 description
-                  "Serves as augmentation target,
-                  Format of physical port connector. E.g., RJ45, USB-C etc.";
+                  "Format of physical port connector. E.g., RJ45, USB-C etc.";
             }
         }
     }
@@ -134,14 +142,13 @@ module device-layer {
                 description
                     "Name of physical link.";
             }
-            // leaf physical-link-type {
-            container physical-link-type {
-                // type enumeration{
-                //     enum usb;
-                //     enum cat5e;
-                //     enum radio;
-                //     enum generic;
-                // }
+            leaf physical-link-type {
+                type enumeration{
+                    enum usb;
+                    enum cat5e;
+                    enum radio;
+                    enum generic;
+                }
                 description
                     "Serves as augmentation target,
                     Types of physical link. E.g, usb, cat5e etc.";
