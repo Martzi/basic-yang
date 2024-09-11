@@ -1,0 +1,21 @@
+<camera xmlns="urn:ietf:params:xml:ns:yang:camera">
+  <model>CamX-500</model>
+  <manufacturer>ExampleCam Inc.</manufacturer>
+  <resolution>1920x1080</resolution>
+  <frame-rate>30</frame-rate>
+  <field-of-view>90</field-of-view>
+  <power-consumption>5.0</power-consumption>
+
+  <usb-interface>
+    <!-- USB Interface (USB3.0) -->
+    <interface-id>usb-port1</interface-id>
+    <usb:usb-interface xmlns:usb="urn:ietf:params:xml:ns:yang:usb-interface">
+      <version>USB3.0</version>
+      <speed>5.00</speed> <!-- 5 Gbps -->
+      <power-consumption>4.5</power-consumption>
+      <usb3:max-current xmlns:usb3="urn:ietf:params:xml:ns:yang:usb3-interface">900</usb3:max-current> <!-- Max current for USB3.0 -->
+      <usb3:signaling-rate xmlns:usb3="urn:ietf:params:xml:ns:yang:usb3-interface">5.00</usb3:signaling-rate> <!-- 5 Gbps signaling rate -->
+      <usb3:backward-compatible xmlns:usb3="urn:ietf:params:xml:ns:yang:usb3-interface">true</usb3:backward-compatible> <!-- USB3.0 backward compatibility -->
+    </usb:usb-interface>
+  </usb-interface>
+</camera>

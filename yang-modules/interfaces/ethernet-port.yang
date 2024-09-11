@@ -1,0 +1,77 @@
+module ethernet-port {
+  namespace "urn:ietf:params:xml:ns:yang:ethernet-port";
+  prefix "eth";
+
+  import ietf-network {
+    prefix "nw";
+  }
+
+  import ietf-network-topology {
+    prefix "nt";
+  }
+
+  import device-layer {
+    prefix "dl";
+  }
+
+  description
+    "This module defines a generic Ethernet port.";
+
+  revision "2024-09-09" {
+    description "Initial revision.";
+  }
+
+  // Ezzel adom hozzá egy magasabb modulhoz ezt a kiterjesztést!
+  augment "/nw:networks/nw:network/nw:node/nt:termination-point/dl:device-layer-termination-point-attributes/dl:port-type"{
+    when "/nw:networks/nw:network/nw:network-types/dl:device-layer-topology" {
+    }
+    description
+      "Extends the device port types
+      with ethernet port";
+
+    container ethernet-port {
+      description "Generic Ethernet port configuration";
+
+      leaf port-id {
+        type string;
+        description "Unique identifier for the Ethernet port.";
+      }
+
+      leaf mac-address {
+        type string;
+        description "MAC address of the Ethernet port.";
+      }
+
+      leaf speed {
+        type enumeration {
+          enum "10Mbps" {
+            description "10 Mbps Ethernet";
+          }
+          enum "100Mbps" {
+            description "100 Mbps Fast Ethernet";
+          }
+          enum "1Gbps" {
+            description "1 Gbps Gigabit Ethernet";
+          }
+          enum "10Gbps" {
+            description "10 Gbps Ethernet";
+          }
+        }
+        description "Speed of the Ethernet port.";
+      }
+
+      leaf duplex-mode {
+        type enumeration {
+          enum full {
+            description "Full duplex";
+          }
+          enum half {
+            description "Half duplex";
+          }
+        }
+        default "full";
+        description "Duplex mode of the Ethernet port.";
+      }
+    }
+  }
+}

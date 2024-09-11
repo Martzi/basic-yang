@@ -1,0 +1,229 @@
+module generic-camera {
+  namespace "urn:ietf:params:xml:ns:yang:camera";
+  prefix "cam";
+
+  import usb-interface {
+    prefix "usb";
+  }
+  import usb2-interface {
+    prefix "usb2";
+  }
+  import usb3-interface {
+    prefix "usb3";
+  }
+
+  description
+    "This module defines a camera device with relevant parameters and a single USB interface.";
+
+  revision "2024-09-09" {
+    description "Initial revision.";
+  }
+
+  augment "nw:/networks/nw:network/nw:node/nw:device-layer-node-attributes/nw:device-type"{
+    when "/nw:networks/nw:network/nw:network-types/dl:device-layer-topology" {
+    }
+
+    container camera {
+    description "Camera device configuration";
+
+    leaf model {
+      type string;
+      default "generic";
+      description "Model name of the camera.";
+    }
+
+    leaf manufacturer {
+      type string;
+      default "generic";
+      description "Manufacturer of the camera.";
+    }
+
+    leaf resolution {
+      type string {
+        pattern "[0-9]+x[0-9]+";  // Example: "1920x1080"
+      }
+      default "1920x1080";
+      description "Resolution of the camera in width x height format.";
+    }
+
+    leaf frame-rate {
+      type uint16;
+      units "fps";
+      default "30";
+      description "Frame rate of the camera in frames per second.";
+    }
+
+    leaf field-of-view {
+      type uint16;
+      units "degrees";
+      default "90";
+      description "Field of view of the camera in degrees.";
+    }
+
+    leaf power-consumption {
+      type decimal64 {
+        fraction-digits 2;
+      }
+      units "W";
+      default "5.0";  // Default power consumption
+      description "Power consumption of the camera in watts.";
+    }
+
+    container usb-interface {
+      description "USB interface of the camera";
+
+      leaf interface-id {
+        type string;
+        description "Unique identifier for the USB interface.";
+      }
+
+      uses usb:usb-interface;  // Reuse the usb-interface grouping for USB attributes
+
+      augment "/usb:usb-interface" {
+        when "usb:version = 'USB2.0'";
+        description "USB2.0-specific attributes";
+        leaf usb2-max-current {
+          type uint16;
+          units "mA";
+          default "500";  // Default USB2.0 max current
+          description "Maximum current for USB2.0 interface.";
+        }
+        leaf usb2-signaling-rate {
+          type decimal64 {
+            fraction-digits 2;
+          }
+          units "Mbps";
+          default "480";  // Default USB2.0 signaling rate
+          description "Signaling rate for USB2.0.";
+        }
+      }
+
+      augment "/usb:usb-interface" {
+        when "usb:version = 'USB3.0'";
+        description "USB3.0-specific attributes";
+        leaf usb3-max-current {
+          type uint16;
+          units "mA";
+          default "900";  // Default USB3.0 max current
+          description "Maximum current for USB3.0 interface.";
+        }
+        leaf usb3-signaling-rate {
+          type decimal64 {
+            fraction-digits 2;
+          }
+          units "Gbps";
+          default "5.0";  // Default USB3.0 signaling rate
+          description "Signaling rate for USB3.0.";
+        }
+        leaf backward-compatible {
+          type boolean;
+          default "true";
+          description "Indicates if USB3.0 is backward compatible with USB2.0.";
+        }
+      }
+    }
+  }
+
+
+
+  // container camera {
+  //   description "Camera device configuration";
+
+  //   leaf model {
+  //     type string;
+  //     default "generic";
+  //     description "Model name of the camera.";
+  //   }
+
+  //   leaf manufacturer {
+  //     type string;
+  //     default "generic";
+  //     description "Manufacturer of the camera.";
+  //   }
+
+  //   leaf resolution {
+  //     type string {
+  //       pattern "[0-9]+x[0-9]+";  // Example: "1920x1080"
+  //     }
+  //     default "1920x1080";
+  //     description "Resolution of the camera in width x height format.";
+  //   }
+
+  //   leaf frame-rate {
+  //     type uint16;
+  //     units "fps";
+  //     default "30";
+  //     description "Frame rate of the camera in frames per second.";
+  //   }
+
+  //   leaf field-of-view {
+  //     type uint16;
+  //     units "degrees";
+  //     default "90";
+  //     description "Field of view of the camera in degrees.";
+  //   }
+
+  //   leaf power-consumption {
+  //     type decimal64 {
+  //       fraction-digits 2;
+  //     }
+  //     units "W";
+  //     default "5.0";  // Default power consumption
+  //     description "Power consumption of the camera in watts.";
+  //   }
+
+  //   container usb-interface {
+  //     description "USB interface of the camera";
+
+  //     leaf interface-id {
+  //       type string;
+  //       description "Unique identifier for the USB interface.";
+  //     }
+
+  //     uses usb:usb-interface;  // Reuse the usb-interface grouping for USB attributes
+
+  //     augment "/usb:usb-interface" {
+  //       when "usb:version = 'USB2.0'";
+  //       description "USB2.0-specific attributes";
+  //       leaf usb2-max-current {
+  //         type uint16;
+  //         units "mA";
+  //         default "500";  // Default USB2.0 max current
+  //         description "Maximum current for USB2.0 interface.";
+  //       }
+  //       leaf usb2-signaling-rate {
+  //         type decimal64 {
+  //           fraction-digits 2;
+  //         }
+  //         units "Mbps";
+  //         default "480";  // Default USB2.0 signaling rate
+  //         description "Signaling rate for USB2.0.";
+  //       }
+  //     }
+
+  //     augment "/usb:usb-interface" {
+  //       when "usb:version = 'USB3.0'";
+  //       description "USB3.0-specific attributes";
+  //       leaf usb3-max-current {
+  //         type uint16;
+  //         units "mA";
+  //         default "900";  // Default USB3.0 max current
+  //         description "Maximum current for USB3.0 interface.";
+  //       }
+  //       leaf usb3-signaling-rate {
+  //         type decimal64 {
+  //           fraction-digits 2;
+  //         }
+  //         units "Gbps";
+  //         default "5.0";  // Default USB3.0 signaling rate
+  //         description "Signaling rate for USB3.0.";
+  //       }
+  //       leaf backward-compatible {
+  //         type boolean;
+  //         default "true";
+  //         description "Indicates if USB3.0 is backward compatible with USB2.0.";
+  //       }
+  //     }
+  //   }
+  // }
+}
