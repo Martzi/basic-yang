@@ -1,11 +1,9 @@
 import os
+import xacro
 
 from ament_index_python.packages import get_package_share_directory
-
 from launch import LaunchDescription
 from launch_ros.actions import Node
-
-import xacro
 
 
 def load_file(package_name, file_path):
@@ -64,17 +62,17 @@ def generate_launch_description():
         parameters=[robot_description]
     )
 
-    spawn_entity = Node(package='gazebo_ros', executable='spawn_entity.py',
-                        arguments=['-topic', 'robot_description',
-                                   '-entity', 'rrbot'],
-                        output='screen')
+    # spawn_entity = Node(package='gazebo_ros', executable='spawn_entity.py',
+    #                     arguments=['-topic', 'robot_description',
+    #                                '-entity', 'rrbot'],
+    #                     output='screen')
 
     # Static TF
-    static_tf = Node(package='tf2_ros',
-                     executable='static_transform_publisher',
-                     name='static_transform_publisher',
-                     output='log',
-                     arguments=['0.0', '0.0', '0.0', '0.0', '0.0', '0.0', 'world', 'nuc_0_joint'])
+    # static_tf = Node(package='tf2_ros',
+    #                  executable='static_transform_publisher',
+    #                  name='static_transform_publisher',
+    #                  output='log',
+    #                  arguments=['0.0', '0.0', '0.0', '0.0', '0.0', '0.0', 'world', 'nuc_0_joint'])
 
     return LaunchDescription([
       node_robot_state_publisher,
