@@ -40,7 +40,7 @@ def generate_launch_description():
     robot_description = {'robot_description': system_description_config}
 
     robot_description_semantic_config = load_file('example_config',
-                                                  os.path.join('config', 'example_config_connections.srdf'))
+                                                  os.path.join('config', 'example_config_connections.sdf'))
     robot_description_semantic = {'robot_description_semantic': robot_description_semantic_config}
 
 
