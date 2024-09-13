@@ -5,15 +5,15 @@
        xmlns:usb-port="urn:ietf:params:xml:ns:yang:usb-port"
        name="usb_typec">
 
-    <xacro:macro name="usb_typec" params="parent">
+    <xacro:macro name="usb_typec" params="parent id=0">
 
-        <joint name="usb_typec_joint" type="fixed">
+        <joint name="usb-typec-${id}_joint" type="fixed">
             <origin xyz="-1 1 0" rpy="0 0 0" />
             <parent link="${parent}"/>
-            <child link="usb-typec_link"/>
+            <child link="usb-typec-${id}_link"/>
         </joint>
 
-        <link name="usb_typec_link">
+        <link name="usb-typec-${id}_link">
             <visual>
                 <origin rpy="0 0 0" xyz="0 0 0"/>
                 <geometry>
@@ -35,24 +35,24 @@
         <yang>
             <!-- usb-typec network topology -->
             <network>
-                <network-id>usb-typec-network</network-id>
+                <network-id>usb-typec-${id}-network</network-id>
                 <network-types>
                     <dl:device-layer-topology xmlns:dl="urn:ietf:params:xml:ns:yang:device-layer"/>
                 </network-types>
                 
                 <supporting-network>
-                    <network-ref>usb-typec-supporting-network</network-ref>
+                    <network-ref>usb-typec-${id}-supporting-network</network-ref>
                 </supporting-network>
                 
                 <node>
-                    <node-id>usb-typec-node</node-id>
+                    <node-id>usb-typec-${id}-node</node-id>
                     <supporting-node>
-                        <network-ref>usb-typec-supporting-network</network-ref>
-                        <node-ref>usb-typec-supporting-node</node-ref>
+                        <network-ref>usb-typec-${id}-supporting-network</network-ref>
+                        <node-ref>usb-typec-${id}-supporting-node</node-ref>
                     </supporting-node>
                     <dl:device-layer-node-attributes xmlns:dl="urn:ietf:params:xml:ns:yang:device-layer">
-                        <dl:device-name>usb-typec-device</dl:device-name>
-                        <dl:device-type>usb-typec-port</dl:device-type>
+                        <dl:device-name>usb-typec-${id}-device</dl:device-name>
+                        <dl:device-type>usb-typec-${id}-port</dl:device-type>
                     </dl:device-layer-node-attributes>
                     
                     <nt:termination-point xmlns:nt="urn:ietf:params:xml:ns:yang:ietf-network-topology">
@@ -68,7 +68,7 @@
                             <dl:port-name>port-1</dl:port-name>
                             <dl:port-type>
                                 <usb:usb-port xmlns:usb="urn:ietf:params:xml:ns:yang:usb-port">
-                                <usb:port-id>usb-typec</usb:port-id>
+                                <usb:port-id>usb-typec-${id}</usb:port-id>
                                 <usb:version>USB3.2</usb:version>
                                 <usb:speed>5.00</usb:speed>
                                 <usb:power-consumption>2.5</usb:power-consumption>

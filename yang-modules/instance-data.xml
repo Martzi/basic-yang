@@ -1,202 +1,390 @@
-<networks xmlns="urn:ietf:params:xml:ns:yang:ietf-network">
-  <network>
-    <network-id>network1</network-id>
-    <supporting-network>
-      <network-ref>network2</network-ref>
-    </supporting-network>
-    <node>
-      <node-id>node1</node-id>
-      <supporting-node>
-        <network-ref>network2</network-ref>
-        <node-ref>node2</node-ref>
-      </supporting-node>
-      <al:application-layer-node-attributes xmlns:al="urn:ietf:params:xml:ns:yang:application-layer">
-        <al:component-name>component1</al:component-name>
-        <al:component-type>generic</al:component-type>
-      </al:application-layer-node-attributes>
-      <dl:device-layer-node-attributes xmlns:dl="urn:ietf:params:xml:ns:yang:device-layer">
-        <dl:device-name>device1</dl:device-name>
-        <dl:device-type>pc</dl:device-type>
-      </dl:device-layer-node-attributes>
-      
-      
-      <nt:termination-point xmlns:nt="urn:ietf:params:xml:ns:yang:ietf-network-topology">
-        <nt:tp-id>tp1</nt:tp-id>
-        <nt:supporting-termination-point>
-          <nt:network-ref>network2</nt:network-ref>
-          <nt:node-ref>node2</nt:node-ref>
-          <nt:tp-ref>tp2</nt:tp-ref>
-        </nt:supporting-termination-point>
-        <al:application-layer-termination-point-attributes xmlns:al="urn:ietf:params:xml:ns:yang:application-layer">
-          <al:reference-interface-name>iface1</al:reference-interface-name>
-          <al:reference-interface-type>ros-topic-subscriber</al:reference-interface-type>
-          <al:topic>topic1</al:topic>
-          <al:message-type>msg1</al:message-type>
-          <al:hz>hz1</al:hz>
-        </al:application-layer-termination-point-attributes>
-        <dl:device-layer-termination-point-attributes xmlns:dl="urn:ietf:params:xml:ns:yang:device-layer">
-          <dl:port-name>port1</dl:port-name>
-          <dl:port-type>rj45</dl:port-type>
-        </dl:device-layer-termination-point-attributes>
-        <nl:network-layer-termination-point-attributes xmlns:nl="urn:ietf:params:xml:ns:yang:network-layer">
-          <nl:interface-name>intf1</nl:interface-name>
-          <nl:interface-type>ethernet</nl:interface-type>
-          <nl:interface-status>up</nl:interface-status>
-          <nl:mac-address>00:1A:2B:3C:4D:5E</nl:mac-address>
-        </nl:network-layer-termination-point-attributes>
-      </nt:termination-point>
-
-
-      <nl:network-layer-node-attributes xmlns:nl="urn:ietf:params:xml:ns:yang:network-layer">
-        <nl:node-name>netNode1</nl:node-name>
-        <nl:node-type>generic</nl:node-type>
-      </nl:network-layer-node-attributes>
-    </node>
-    <al:application-layer-topology xmlns:al="urn:ietf:params:xml:ns:yang:application-layer">
-      <al:element>element1</al:element>
-    </al:application-layer-topology>
-
-
-    <dl:device-layer-topology xmlns:dl="urn:ietf:params:xml:ns:yang:device-layer">
-      <dl:element>element2</dl:element>
-    </dl:device-layer-topology>
-    
-    
-    <nt:link xmlns:nt="urn:ietf:params:xml:ns:yang:ietf-network-topology">
-      <nt:link-id>link1</nt:link-id>
-      <nt:source>
-        <nt:source-node>node1</nt:source-node>
-        <nt:source-tp>tp1</nt:source-tp>
-      </nt:source>
-      <nt:destination>
-        <nt:dest-node>node2</nt:dest-node>
-        <nt:dest-tp>tp2</nt:dest-tp>
-      </nt:destination>
-      <nt:supporting-link>
-        <nt:network-ref>network2</nt:network-ref>
-        <nt:link-ref>link2</nt:link-ref>
-      </nt:supporting-link>
-      <al:application-layer-link-attributes xmlns:al="urn:ietf:params:xml:ns:yang:application-layer">
-        <al:logical-link-name>logLink1</al:logical-link-name>
-        <al:logical-link-type>ros-topic</al:logical-link-type>
-        <al:bitrate>100</al:bitrate>
-        <al:message-size>1024</al:message-size>
-        <al:e2e-latency>5</al:e2e-latency>
-      </al:application-layer-link-attributes>
-      <dl:device-layer-link-attributes xmlns:dl="urn:ietf:params:xml:ns:yang:device-layer">
-        <dl:physical-link-name>physLink1</dl:physical-link-name>
-        <dl:physical-link-type>cat5e</dl:physical-link-type>
-      </dl:device-layer-link-attributes>
-      <nl:network-layer-link-attributes xmlns:nl="urn:ietf:params:xml:ns:yang:network-layer">
-        <nl:link-name>netLink1</nl:link-name>
-        <nl:link-type>3gpp-5g-qos-flow</nl:link-type>
-        <nl:_5qi>1</nl:_5qi>
-        <nl:gfbr>50</nl:gfbr>
-        <nl:mfbr>100</nl:mfbr>
-        <nl:pdb>20</nl:pdb>
-        <nl:per>0</nl:per>
-      </nl:network-layer-link-attributes>
-    </nt:link>
-
-
-    <nl:network-layer-topology xmlns:nl="urn:ietf:params:xml:ns:yang:network-layer">
-      <nl:element>element3</nl:element>
-    </nl:network-layer-topology>
-  </network>
-
-  <network>
-    <network-id>network1_asd</network-id>
-    <supporting-network>
-      <network-ref>network2</network-ref>
-    </supporting-network>
-    <node>
-      <node-id>node1</node-id>
-      <supporting-node>
-        <network-ref>network2</network-ref>
-        <node-ref>node2</node-ref>
-      </supporting-node>
-      <al:application-layer-node-attributes xmlns:al="urn:ietf:params:xml:ns:yang:application-layer">
-        <al:component-name>component1</al:component-name>
-        <al:component-type>generic</al:component-type>
-      </al:application-layer-node-attributes>
-      <dl:device-layer-node-attributes xmlns:dl="urn:ietf:params:xml:ns:yang:device-layer">
-        <dl:device-name>device1</dl:device-name>
-        <dl:device-type>pc</dl:device-type>
-      </dl:device-layer-node-attributes>
-      <nt:termination-point xmlns:nt="urn:ietf:params:xml:ns:yang:ietf-network-topology">
-        <nt:tp-id>tp1</nt:tp-id>
-        <nt:supporting-termination-point>
-          <nt:network-ref>network2</nt:network-ref>
-          <nt:node-ref>node2</nt:node-ref>
-          <nt:tp-ref>tp2</nt:tp-ref>
-        </nt:supporting-termination-point>
-        <al:application-layer-termination-point-attributes xmlns:al="urn:ietf:params:xml:ns:yang:application-layer">
-          <al:reference-interface-name>iface1</al:reference-interface-name>
-          <al:reference-interface-type>ros-topic-subscriber</al:reference-interface-type>
-          <al:topic>topic1</al:topic>
-          <al:message-type>msg1</al:message-type>
-          <al:hz>hz1</al:hz>
-        </al:application-layer-termination-point-attributes>
-        <dl:device-layer-termination-point-attributes xmlns:dl="urn:ietf:params:xml:ns:yang:device-layer">
-          <dl:port-name>port1</dl:port-name>
-          <dl:port-type>rj45</dl:port-type>
-        </dl:device-layer-termination-point-attributes>
-        <nl:network-layer-termination-point-attributes xmlns:nl="urn:ietf:params:xml:ns:yang:network-layer">
-          <nl:interface-name>intf1</nl:interface-name>
-          <nl:interface-type>ethernet</nl:interface-type>
-          <nl:interface-status>up</nl:interface-status>
-          <nl:mac-address>00:1A:2B:3C:4D:5E</nl:mac-address>
-        </nl:network-layer-termination-point-attributes>
-      </nt:termination-point>
-      <nl:network-layer-node-attributes xmlns:nl="urn:ietf:params:xml:ns:yang:network-layer">
-        <nl:node-name>netNode1</nl:node-name>
-        <nl:node-type>generic</nl:node-type>
-      </nl:network-layer-node-attributes>
-    </node>
-    <al:application-layer-topology xmlns:al="urn:ietf:params:xml:ns:yang:application-layer">
-      <al:element>element1</al:element>
-    </al:application-layer-topology>
-    <dl:device-layer-topology xmlns:dl="urn:ietf:params:xml:ns:yang:device-layer">
-      <dl:element>element2</dl:element>
-    </dl:device-layer-topology>
-    <nt:link xmlns:nt="urn:ietf:params:xml:ns:yang:ietf-network-topology">
-      <nt:link-id>link1</nt:link-id>
-      <nt:source>
-        <nt:source-node>node1</nt:source-node>
-        <nt:source-tp>tp1</nt:source-tp>
-      </nt:source>
-      <nt:destination>
-        <nt:dest-node>node2</nt:dest-node>
-        <nt:dest-tp>tp2</nt:dest-tp>
-      </nt:destination>
-      <nt:supporting-link>
-        <nt:network-ref>network2</nt:network-ref>
-        <nt:link-ref>link2</nt:link-ref>
-      </nt:supporting-link>
-      <al:application-layer-link-attributes xmlns:al="urn:ietf:params:xml:ns:yang:application-layer">
-        <al:logical-link-name>logLink1</al:logical-link-name>
-        <al:logical-link-type>ros-topic</al:logical-link-type>
-        <al:bitrate>100</al:bitrate>
-        <al:message-size>1024</al:message-size>
-        <al:e2e-latency>5</al:e2e-latency>
-      </al:application-layer-link-attributes>
-      <dl:device-layer-link-attributes xmlns:dl="urn:ietf:params:xml:ns:yang:device-layer">
-        <dl:physical-link-name>physLink1</dl:physical-link-name>
-        <dl:physical-link-type>cat5e</dl:physical-link-type>
-      </dl:device-layer-link-attributes>
-      <nl:network-layer-link-attributes xmlns:nl="urn:ietf:params:xml:ns:yang:network-layer">
-        <nl:link-name>netLink1</nl:link-name>
-        <nl:link-type>3gpp-5g-qos-flow</nl:link-type>
-        <nl:_5qi>1</nl:_5qi>
-        <nl:gfbr>50</nl:gfbr>
-        <nl:mfbr>100</nl:mfbr>
-        <nl:pdb>20</nl:pdb>
-        <nl:per>0</nl:per>
-      </nl:network-layer-link-attributes>
-    </nt:link>
-    <nl:network-layer-topology xmlns:nl="urn:ietf:params:xml:ns:yang:network-layer">
-      <nl:element>element3</nl:element>
-    </nl:network-layer-topology>
-  </network>
-
-</networks>
+<?xml version="1.0" ?>
+<robot name="example-configuration"
+	xmlns:application-layer="urn:ietf:params:xml:ns:yang:application-layer"
+	xmlns:device-layer="urn:ietf:params:xml:ns:yang:device-layer"
+	xmlns:ethernet-port="urn:ietf:params:xml:ns:yang:ethernet-port"
+	xmlns:ietf-network="urn:ietf:params:xml:ns:yang:ietf-network"
+	xmlns:ietf-network-topology="urn:ietf:params:xml:ns:yang:ietf-network-topology"
+	xmlns:network-layer="urn:ietf:params:xml:ns:yang:network-layer"
+	xmlns:usb-port="urn:ietf:params:xml:ns:yang:usb-port">
+	<link name="world"/>
+	<material name="aluminum">
+		<color rgba="0.5 0.5 0.5 1"/>
+	</material>
+	<material name="plastic">
+		<color rgba="0.1 0.1 0.1 1"/>
+	</material>
+	<!-- camera body, with origin at bottom screw mount -->
+	<joint name="camera_joint" type="fixed">
+		<origin rpy="0 1.57 0" xyz="-0.022 -0.039 -0.01"/>
+		<parent link="world"/>
+		<child link="camera_bottom_screw_frame"/>
+	</joint>
+	<link name="camera_bottom_screw_frame"/>
+	<joint name="camera_link_joint" type="fixed">
+		<origin rpy="0 0 0" xyz="0.011150000000000002 0.0475 0.0145"/>
+		<parent link="camera_bottom_screw_frame"/>
+		<child link="camera_link"/>
+	</joint>
+	<link name="camera_link">
+		<visual>
+			<!-- the mesh origin is at front plate in between the two infrared camera axes -->
+			<!-- <origin xyz="${d455_zero_depth_to_glass-d455_cam_depth/2} ${-d455_cam_depth_py} 0" rpy="0 0 0"/> -->
+			<origin rpy="1.5707963267948966 0 1.5707963267948966" xyz="0.0046500000000000005 -0.0475 0"/>
+			<geometry>
+				<!-- <box size="${d455_cam_depth} ${d455_cam_width} ${d455_cam_height}"/> -->
+				<mesh filename="file:///home/martzi/basic-yang-ws/install/realsense2_description/share/realsense2_description/meshes/d455.stl" scale="0.001 0.001 0.001"/>
+			</geometry>
+			<material name="aluminum"/>
+		</visual>
+		<collision>
+			<origin rpy="0 0 0" xyz="-0.00845 -0.0475 0"/>
+			<geometry>
+				<box size="0.026 0.124 0.029"/>
+			</geometry>
+		</collision>
+		<inertial>
+			<!-- The following are not reliable values, and should not be used for modeling -->
+			<mass value="0.072"/>
+			<origin xyz="0 0 0"/>
+			<inertia ixx="0.003881243" ixy="0.0" ixz="0.0" iyy="0.000498940" iyz="0.0" izz="0.003879257"/>
+		</inertial>
+	</link>
+	<yang>
+		<!-- Intel RealSense D455 network topology -->
+		<network>
+			<network-id>camera-network</network-id>
+			<network-types>
+				<dl:device-layer-topology
+					xmlns:dl="urn:ietf:params:xml:ns:yang:device-layer"/>
+				</network-types>
+				<supporting-network>
+					<network-ref>camera-supporting-network</network-ref>
+				</supporting-network>
+				<node>
+					<node-id>camera-usb-typec-node</node-id>
+					<supporting-node>
+						<network-ref>camera-usb-typec-supporting-network</network-ref>
+						<node-ref>camera-usb-typec-supporting-node</node-ref>
+					</supporting-node>
+					<joint name="usb-typec-0_joint" type="fixed">
+						<origin rpy="0 0 0" xyz="-1 1 0"/>
+						<parent link="world"/>
+						<child link="usb-typec-0_link"/>
+					</joint>
+					<link name="usb-typec-0_link">
+						<visual>
+							<origin rpy="0 0 0" xyz="0 0 0"/>
+							<geometry>
+								<mesh filename="package://interface_description/meshes/usb-typec-female.stl" scale="0.001 0.001 0.001"/>
+							</geometry>
+							<material name="LightGrey">
+								<color rgba="0.7 0.7 0.7 1.0"/>
+							</material>
+						</visual>
+						<collision>
+							<origin rpy="0 0 0" xyz="0 0 0"/>
+							<geometry>
+								<mesh filename="package://interface_description/meshes/usb-typec-female.stl" scale="0.001 0.001 0.001"/>
+							</geometry>
+						</collision>
+					</link>
+					<yang>
+						<!-- usb-typec network topology -->
+						<network>
+							<network-id>usb-typec-0-network</network-id>
+							<network-types>
+								<dl:device-layer-topology
+									xmlns:dl="urn:ietf:params:xml:ns:yang:device-layer"/>
+								</network-types>
+								<supporting-network>
+									<network-ref>usb-typec-0-supporting-network</network-ref>
+								</supporting-network>
+								<node>
+									<node-id>usb-typec-0-node</node-id>
+									<supporting-node>
+										<network-ref>usb-typec-0-supporting-network</network-ref>
+										<node-ref>usb-typec-0-supporting-node</node-ref>
+									</supporting-node>
+									<dl:device-layer-node-attributes
+										xmlns:dl="urn:ietf:params:xml:ns:yang:device-layer">
+										<dl:device-name>usb-typec-0-device</dl:device-name>
+										<dl:device-type>usb-typec-0-port</dl:device-type>
+									</dl:device-layer-node-attributes>
+									<nt:termination-point
+										xmlns:nt="urn:ietf:params:xml:ns:yang:ietf-network-topology">
+										<nt:tp-id>tp-1</nt:tp-id>
+										<nt:supporting-termination-point>
+											<nt:network-ref>supporting-network-1</nt:network-ref>
+											<nt:node-ref>supporting-node-1</nt:node-ref>
+											<nt:tp-ref>tp-ref-1</nt:tp-ref>
+										</nt:supporting-termination-point>
+										<dl:device-layer-termination-point-attributes
+											xmlns:dl="urn:ietf:params:xml:ns:yang:device-layer">
+											<dl:port-name>port-1</dl:port-name>
+											<dl:port-type>
+												<usb:usb-port
+													xmlns:usb="urn:ietf:params:xml:ns:yang:usb-port">
+													<usb:port-id>usb-typec-0</usb:port-id>
+													<usb:version>USB3.2</usb:version>
+													<usb:speed>5.00</usb:speed>
+													<usb:power-consumption>2.5</usb:power-consumption>
+												</usb:usb-port>
+											</dl:port-type>
+										</dl:device-layer-termination-point-attributes>
+									</nt:termination-point>
+								</node>
+							</network>
+						</yang>
+					</node>
+				</network>
+			</yang>
+			<joint name="nuc_0_joint" type="fixed">
+				<origin rpy="0 0 0" xyz="-1 1 0"/>
+				<!-- <origin xyz="-1 1 0" rpy="0 0 0" /> -->
+				<parent link="world"/>
+				<child link="nuc_0_link"/>
+			</joint>
+			<link name="nuc_0_link">
+				<visual>
+					<origin rpy="0 0 0" xyz="0 0 0"/>
+					<geometry>
+						<mesh filename="package://nuc_description/meshes/intel_nuc.stl" scale="0.001 0.001 0.001"/>
+					</geometry>
+					<material name="LightGrey">
+						<color rgba="0.7 0.7 0.7 1.0"/>
+					</material>
+				</visual>
+				<collision>
+					<origin rpy="0 0 0" xyz="0 0 0"/>
+					<geometry>
+						<mesh filename="package://nuc_description/meshes/intel_nuc.stl" scale="0.001 0.001 0.001"/>
+					</geometry>
+				</collision>
+			</link>
+			<!-- ethernet-0 -->
+			<joint name="nuc_0_rj45_0_frame" type="fixed">
+				<parent link="nuc_0_link"/>
+				<child link="nuc_0_rj45_0_link"/>
+				<origin rpy="-1.5707963 0 0" xyz="0.04 0.068 0.032"/>
+			</joint>
+			<link name="nuc_0_rj45_0_link">
+				<visual>
+					<origin rpy="0 0 0" xyz="0 0 0"/>
+					<geometry>
+						<mesh filename="file:///home/martzi/basic-yang-ws/install/interface_description/share/interface_description/meshes/rj45-female.stl" scale="0.001 0.001 0.001"/>
+					</geometry>
+				</visual>
+				<collision>
+					<origin rpy="0 0 0" xyz="0 0 0"/>
+					<geometry>
+						<mesh filename="file:///home/martzi/basic-yang-ws/install/interface_description/share/interface_description/meshes/rj45-female.stl" scale="0.001 0.001 0.001"/>
+					</geometry>
+				</collision>
+			</link>
+			<!-- USB-30-0 -->
+			<joint name="nuc_0_usb-a-30_0_frame" type="fixed">
+				<parent link="nuc_0_link"/>
+				<child link="nuc_0_usb-a-30_0_link"/>
+				<origin rpy="1.5707963 1.5707963 0" xyz="0.087 0.119 0.019"/>
+			</joint>
+			<link name="nuc_0_usb-a-30_0_link">
+				<visual>
+					<origin rpy="0 0 0" xyz="0 0 0"/>
+					<geometry>
+						<mesh filename="file:///home/martzi/basic-yang-ws/install/interface_description/share/interface_description/meshes/usb-A-female.stl" scale="0.001 0.001 0.001"/>
+					</geometry>
+				</visual>
+				<collision>
+					<origin rpy="0 0 0" xyz="0 0 0"/>
+					<geometry>
+						<mesh filename="file:///home/martzi/basic-yang-ws/install/interface_description/share/interface_description/meshes/usb-A-female.stl" scale="0.001 0.001 0.001"/>
+					</geometry>
+				</collision>
+			</link>
+			<!-- USB-30-1 -->
+			<joint name="nuc_0_usb-a-30_1_frame" type="fixed">
+				<parent link="nuc_0_link"/>
+				<child link="nuc_0_usb-a-30_1_link"/>
+				<origin rpy="1.5707963 1.5707963 0" xyz="0.075 0.119 0.019"/>
+			</joint>
+			<link name="nuc_0_usb-a-30_1_link">
+				<visual>
+					<origin rpy="0 0 0" xyz="0 0 0"/>
+					<geometry>
+						<mesh filename="file:///home/martzi/basic-yang-ws/install/interface_description/share/interface_description/meshes/usb-A-female.stl" scale="0.001 0.001 0.001"/>
+					</geometry>
+				</visual>
+				<collision>
+					<origin rpy="0 0 0" xyz="0 0 0"/>
+					<geometry>
+						<mesh filename="file:///home/martzi/basic-yang-ws/install/interface_description/share/interface_description/meshes/usb-A-female.stl" scale="0.001 0.001 0.001"/>
+					</geometry>
+				</collision>
+			</link>
+			<yang>
+				<!-- NUC network topology -->
+				<network>
+					<network-id>nuc-0-network</network-id>
+					<network-types>
+						<dl:device-layer-topology
+							xmlns:dl="urn:ietf:params:xml:ns:yang:device-layer"/>
+						</network-types>
+						<supporting-network>
+							<network-ref>nuc-0-supporting-network</network-ref>
+						</supporting-network>
+						<node>
+							<node-id>nuc-0-usb-node</node-id>
+							<supporting-node>
+								<network-ref>nuc-0-usb-supporting-network</network-ref>
+								<node-ref>nuc-0-usb-supporting-node</node-ref>
+							</supporting-node>
+							<joint name="usb30-0_joint" type="fixed">
+								<origin rpy="0 0 0" xyz="-1 1 0"/>
+								<parent link="world"/>
+								<child link="usb30-0_link"/>
+							</joint>
+							<link name="usb30-0_link">
+								<visual>
+									<origin rpy="0 0 0" xyz="0 0 0"/>
+									<geometry>
+										<mesh filename="package://interface_description/meshes/usb-A-female.stl" scale="0.001 0.001 0.001"/>
+									</geometry>
+									<material name="LightGrey">
+										<color rgba="0.7 0.7 0.7 1.0"/>
+									</material>
+								</visual>
+								<collision>
+									<origin rpy="0 0 0" xyz="0 0 0"/>
+									<geometry>
+										<mesh filename="package://interface_description/meshes/usb-A-female.stl" scale="0.001 0.001 0.001"/>
+									</geometry>
+								</collision>
+							</link>
+							<yang>
+								<!-- usb30 network topology -->
+								<network>
+									<network-id>usb30-0-network</network-id>
+									<network-types>
+										<dl:device-layer-topology
+											xmlns:dl="urn:ietf:params:xml:ns:yang:device-layer"/>
+										</network-types>
+										<supporting-network>
+											<network-ref>usb30-0-supporting-network</network-ref>
+										</supporting-network>
+										<node>
+											<node-id>usb30-0-node</node-id>
+											<supporting-node>
+												<network-ref>usb30-0-supporting-network</network-ref>
+												<node-ref>usb30-0-supporting-node</node-ref>
+											</supporting-node>
+											<dl:device-layer-node-attributes
+												xmlns:dl="urn:ietf:params:xml:ns:yang:device-layer">
+												<dl:device-name>usb30-0-device</dl:device-name>
+												<dl:device-type>usb30-0-port</dl:device-type>
+											</dl:device-layer-node-attributes>
+											<nt:termination-point
+												xmlns:nt="urn:ietf:params:xml:ns:yang:ietf-network-topology">
+												<nt:tp-id>tp-1</nt:tp-id>
+												<nt:supporting-termination-point>
+													<nt:network-ref>supporting-network-1</nt:network-ref>
+													<nt:node-ref>supporting-node-1</nt:node-ref>
+													<nt:tp-ref>tp-ref-1</nt:tp-ref>
+												</nt:supporting-termination-point>
+												<dl:device-layer-termination-point-attributes
+													xmlns:dl="urn:ietf:params:xml:ns:yang:device-layer">
+													<dl:port-name>port-1</dl:port-name>
+													<dl:port-type>
+														<usb:usb-port
+															xmlns:usb="urn:ietf:params:xml:ns:yang:usb-port">
+															<usb:port-id>USB30-0</usb:port-id>
+															<usb:version>USB3.0</usb:version>
+															<usb:speed>5.00</usb:speed>
+															<usb:power-consumption>2.5</usb:power-consumption>
+														</usb:usb-port>
+													</dl:port-type>
+												</dl:device-layer-termination-point-attributes>
+											</nt:termination-point>
+										</node>
+									</network>
+								</yang>
+							</node>
+							<node>
+								<node-id>nuc-0-cat6-node</node-id>
+								<supporting-node>
+									<network-ref>nuc-0-cat6-supporting-network</network-ref>
+									<node-ref>nuc-0-cat6-supporting-node</node-ref>
+								</supporting-node>
+								<joint name="cat6-0_joint" type="fixed">
+									<origin rpy="0 0 0" xyz="-1 1 0"/>
+									<parent link="world"/>
+									<child link="cat6-0_link"/>
+								</joint>
+								<link name="cat6-0_link">
+									<visual>
+										<origin rpy="0 0 0" xyz="0 0 0"/>
+										<geometry>
+											<mesh filename="package://interface_description/meshes/rj45_female.stl" scale="0.001 0.001 0.001"/>
+										</geometry>
+										<material name="LightGrey">
+											<color rgba="0.7 0.7 0.7 1.0"/>
+										</material>
+									</visual>
+									<collision>
+										<origin rpy="0 0 0" xyz="0 0 0"/>
+										<geometry>
+											<mesh filename="package://interface_description/meshes/rj45_female.stl" scale="0.001 0.001 0.001"/>
+										</geometry>
+									</collision>
+								</link>
+								<yang>
+									<!-- cat6 network topology -->
+									<network>
+										<network-id>cat6-0-network</network-id>
+										<network-types>
+											<dl:device-layer-topology
+												xmlns:dl="urn:ietf:params:xml:ns:yang:device-layer"/>
+											</network-types>
+											<supporting-network>
+												<network-ref>cat6-0-supporting-network</network-ref>
+											</supporting-network>
+											<node>
+												<node-id>cat6-0-node</node-id>
+												<supporting-node>
+													<network-ref>cat6-0-supporting-network</network-ref>
+													<node-ref>cat6-0-supporting-node</node-ref>
+												</supporting-node>
+												<dl:device-layer-node-attributes
+													xmlns:dl="urn:ietf:params:xml:ns:yang:device-layer">
+													<dl:device-name>cat6-0-interface</dl:device-name>
+													<dl:device-type>port</dl:device-type>
+												</dl:device-layer-node-attributes>
+												<nt:termination-point
+													xmlns:nt="urn:ietf:params:xml:ns:yang:ietf-network-topology">
+													<nt:tp-id>tp-1</nt:tp-id>
+													<nt:supporting-termination-point>
+														<nt:network-ref>supporting-network-1</nt:network-ref>
+														<nt:node-ref>supporting-node-1</nt:node-ref>
+														<nt:tp-ref>tp-ref-1</nt:tp-ref>
+													</nt:supporting-termination-point>
+													<dl:device-layer-termination-point-attributes
+														xmlns:dl="urn:ietf:params:xml:ns:yang:device-layer">
+														<dl:port-name>rj45-0</dl:port-name>
+														<dl:port-type>
+															<eth:ethernet-port
+																xmlns:eth="urn:ietf:params:xml:ns:yang:ethernet-port">
+																<eth:port-id>eth-0</eth:port-id>
+																<eth:mac-address>00:1A:2B:3C:4D:5E</eth:mac-address>
+																<eth:speed>1000Mbps</eth:speed>
+																<eth:duplex-mode>full</eth:duplex-mode>
+															</eth:ethernet-port>
+														</dl:port-type>
+													</dl:device-layer-termination-point-attributes>
+												</nt:termination-point>
+											</node>
+										</network>
+									</yang>
+								</node>
+							</network>
+						</yang>
+					</robot>

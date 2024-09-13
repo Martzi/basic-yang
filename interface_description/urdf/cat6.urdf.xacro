@@ -7,13 +7,13 @@
 
     <xacro:macro name="cat6" params="parent id:=0">
 
-        <joint name="cat6_joint" type="fixed">
+        <joint name="cat6-${id}_joint" type="fixed">
             <origin xyz="-1 1 0" rpy="0 0 0" />
             <parent link="${parent}"/>
-            <child link="cat6_link"/>
+            <child link="cat6-${id}_link"/>
         </joint>
 
-        <link name="cat6_link">
+        <link name="cat6-${id}_link">
             <visual>
                 <origin rpy="0 0 0" xyz="0 0 0"/>
                 <geometry>
@@ -36,23 +36,23 @@
         <yang>
             <!-- cat6 network topology -->
             <network>
-                <network-id>cat6-network</network-id>
+                <network-id>cat6-${id}-network</network-id>
                 <network-types>
                     <dl:device-layer-topology xmlns:dl="urn:ietf:params:xml:ns:yang:device-layer"/>
                 </network-types>
                 
                 <supporting-network>
-                    <network-ref>cat6-supporting-network</network-ref>
+                    <network-ref>cat6-${id}-supporting-network</network-ref>
                 </supporting-network>
                 
                 <node>
-                    <node-id>cat6-node</node-id>
+                    <node-id>cat6-${id}-node</node-id>
                     <supporting-node>
-                        <network-ref>cat6-supporting-network</network-ref>
-                        <node-ref>cat6-supporting-node</node-ref>
+                        <network-ref>cat6-${id}-supporting-network</network-ref>
+                        <node-ref>cat6-${id}-supporting-node</node-ref>
                     </supporting-node>
                     <dl:device-layer-node-attributes xmlns:dl="urn:ietf:params:xml:ns:yang:device-layer">
-                        <dl:device-name>cat6-interface</dl:device-name>
+                        <dl:device-name>cat6-${id}-interface</dl:device-name>
                         <dl:device-type>port</dl:device-type>
                     </dl:device-layer-node-attributes>
                     
@@ -66,10 +66,10 @@
                         </nt:supporting-termination-point>
                         
                         <dl:device-layer-termination-point-attributes xmlns:dl="urn:ietf:params:xml:ns:yang:device-layer">
-                            <dl:port-name>port-1</dl:port-name>
+                            <dl:port-name>rj45-${id}</dl:port-name>
                             <dl:port-type>
                                 <eth:ethernet-port xmlns:eth="urn:ietf:params:xml:ns:yang:ethernet-port">
-                                <eth:port-id>eth1</eth:port-id>
+                                <eth:port-id>eth-${id}</eth:port-id>
                                 <eth:mac-address>00:1A:2B:3C:4D:5E</eth:mac-address>
                                 <eth:speed>1000Mbps</eth:speed>
                                 <eth:duplex-mode>full</eth:duplex-mode>

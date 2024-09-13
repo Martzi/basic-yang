@@ -7,13 +7,13 @@
 
     <xacro:macro name="usb30" params="parent id:=0">
 
-        <joint name="usb30_joint" type="fixed">
+        <joint name="usb30-${id}_joint" type="fixed">
             <origin xyz="-1 1 0" rpy="0 0 0" />
             <parent link="${parent}"/>
-            <child link="usb30_link"/>
+            <child link="usb30-${id}_link"/>
         </joint>
 
-        <link name="usb30_link">
+        <link name="usb30-${id}_link">
             <visual>
                 <origin rpy="0 0 0" xyz="0 0 0"/>
                 <geometry>
@@ -35,24 +35,24 @@
         <yang>
             <!-- usb30 network topology -->
             <network>
-                <network-id>usb30-network</network-id>
+                <network-id>usb30-${id}-network</network-id>
                 <network-types>
                     <dl:device-layer-topology xmlns:dl="urn:ietf:params:xml:ns:yang:device-layer"/>
                 </network-types>
                 
                 <supporting-network>
-                    <network-ref>usb30-supporting-network</network-ref>
+                    <network-ref>usb30-${id}-supporting-network</network-ref>
                 </supporting-network>
                 
                 <node>
-                    <node-id>usb30-node</node-id>
+                    <node-id>usb30-${id}-node</node-id>
                     <supporting-node>
-                        <network-ref>usb30-supporting-network</network-ref>
-                        <node-ref>usb30-supporting-node</node-ref>
+                        <network-ref>usb30-${id}-supporting-network</network-ref>
+                        <node-ref>usb30-${id}-supporting-node</node-ref>
                     </supporting-node>
                     <dl:device-layer-node-attributes xmlns:dl="urn:ietf:params:xml:ns:yang:device-layer">
-                        <dl:device-name>usb30-device</dl:device-name>
-                        <dl:device-type>usb30-port</dl:device-type>
+                        <dl:device-name>usb30-${id}-device</dl:device-name>
+                        <dl:device-type>usb30-${id}-port</dl:device-type>
                     </dl:device-layer-node-attributes>
                     
                     <nt:termination-point xmlns:nt="urn:ietf:params:xml:ns:yang:ietf-network-topology">
@@ -68,7 +68,7 @@
                             <dl:port-name>port-1</dl:port-name>
                             <dl:port-type>
                                 <usb:usb-port xmlns:usb="urn:ietf:params:xml:ns:yang:usb-port">
-                                <usb:port-id>eth1</usb:port-id>
+                                <usb:port-id>USB30-${id}</usb:port-id>
                                 <usb:version>USB3.0</usb:version>
                                 <usb:speed>5.00</usb:speed>
                                 <usb:power-consumption>2.5</usb:power-consumption>

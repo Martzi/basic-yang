@@ -4,8 +4,6 @@
    
     <xacro:include filename="$(find interface_description)/urdf/cat6.urdf.xacro"/>
     <xacro:include filename="$(find interface_description)/urdf/usb30.urdf.xacro"/>
-    <!-- <xacro:include filename="$(find interface_description)/urdf/wifi4.urdf.xacro"/> -->
-    <!-- <xacro:include filename="$(find interface_description)/urdf/wifi5.urdf.xacro"/> -->
 
     <xacro:macro name="nuc" params="parent id:=0 xyz:= '-1 1 0' ">
 
@@ -106,44 +104,39 @@
 
         <yang>
             <!-- NUC network topology -->
-
-            <!-- valahol ezen belül példányosítani kell az usb-t! -->
-            <!-- <xacro:usb30 parent="world" id="0"> -->
             <network>
-                <network-id>nuc-network</network-id>
+                <network-id>nuc-${id}-network</network-id>
                 
                 <network-types>
                     <dl:device-layer-topology xmlns:dl="urn:ietf:params:xml:ns:yang:device-layer"/>
                 </network-types>
 
                 <supporting-network>
-                    <network-ref>nuc-supporting-network</network-ref>
+                    <network-ref>nuc-${id}-supporting-network</network-ref>
                 </supporting-network>
 
                 <node>
-                    <node-id>nuc-usb-node</node-id>
+                    <node-id>nuc-${id}-usb-node</node-id>
                     <supporting-node>
-                        <network-ref>nuc-usb-supporting-network</network-ref>
-                        <node-ref>nuc-usb-supporting-node</node-ref>
+                        <network-ref>nuc-${id}-usb-supporting-network</network-ref>
+                        <node-ref>nuc-${id}-usb-supporting-node</node-ref>
                     </supporting-node>
                     
                     <xacro:usb30 parent="world" id="0" />
                 </node>
 
                 <node>
-                    <node-id>nuc-cat6-node</node-id>
+                    <node-id>nuc-${id}-cat6-node</node-id>
                     
                     <supporting-node>
-                        <network-ref>nuc-cat6-supporting-network</network-ref>
-                        <node-ref>nuc-cat6-supporting-node</node-ref>
+                        <network-ref>nuc-${id}-cat6-supporting-network</network-ref>
+                        <node-ref>nuc-${id}-cat6-supporting-node</node-ref>
                     </supporting-node>
                     
                     <xacro:cat6 parent="world" id="0" />
                 </node>
 
             </network>
-
         </yang>
-
     </xacro:macro>
 </robot>

@@ -75,6 +75,7 @@ module network-layer {
             leaf node-type {
                 type enumeration{
                     enum generic;
+                    // todo kiegészíteni!
                 }
                 description
                   "Type of network layer node.";
