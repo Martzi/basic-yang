@@ -1,16 +1,11 @@
-
-<networks xmlns="urn:example:network-topology">
-  
+<networks xmlns="urn:ietf:params:xml:ns:yang:ietf-network">
   <network>
-    
     <network-id>network-1</network-id>
-    
     <network-types>
-      <al:application-layer-topology xmlns:al="urn:example:al"/>
-      <dl:device-layer-topology xmlns:dl="urn:example:dl"/>
-      <nl:network-layer-topology xmlns:nl="urn:example:nl"/>
+      <device-layer:device-layer-topology xmlns:device-layer="urn:ietf:params:xml:ns:yang:device-layer"/>
+      <network-layer:network-layer-topology xmlns:network-layer="urn:ietf:params:xml:ns:yang:network-layer"/>
     </network-types>
-    
+   
     <supporting-network>
       <network-ref>supporting-network-1</network-ref>
     </supporting-network>
@@ -23,98 +18,77 @@
         <node-ref>supporting-node-1</node-ref>
       </supporting-node>
       
-      <al:application-layer-node-attributes xmlns:al="urn:example:al">
-        <al:component-name>Component-1</al:component-name>
-        <al:component-type>TypeA</al:component-type>
-      </al:application-layer-node-attributes>
-      
-      <dl:device-layer-node-attributes xmlns:dl="urn:example:dl">
-        <dl:device-name>Device-1</dl:device-name>
-        <dl:device-type>TypeB</dl:device-type>
-      </dl:device-layer-node-attributes>
-      
-      <nt:termination-point xmlns:nt="urn:example:nt">
-        <nt:tp-id>tp-1</nt:tp-id>
-        
-        <nt:supporting-termination-point>
-          <nt:network-ref>supporting-network-1</nt:network-ref>
-          <nt:node-ref>supporting-node-1</nt:node-ref>
-          <nt:tp-ref>tp-ref-1</nt:tp-ref>
-        </nt:supporting-termination-point>
-        
-        <al:application-layer-termination-point-attributes xmlns:al="urn:example:al">
-          <al:reference-interface-name>eth0</al:reference-interface-name>
-          <al:reference-interface-type>ethernet</al:reference-interface-type>
-        </al:application-layer-termination-point-attributes>
-        
-        <dl:device-layer-termination-point-attributes xmlns:dl="urn:example:dl">
-          <dl:port-name>port-1</dl:port-name>
-          <dl:port-type>
-            <eth:ethernet-port xmlns:eth="urn:example:eth">
-              <eth:port-id>eth1</eth:port-id>
-              <eth:mac-address>00:1A:2B:3C:4D:5E</eth:mac-address>
-              <eth:speed>1000Mbps</eth:speed>
-              <eth:duplex-mode>full</eth:duplex-mode>
-            </eth:ethernet-port>
-          </dl:port-type>
-        </dl:device-layer-termination-point-attributes>
-        
-        <nl:network-layer-termination-point-attributes xmlns:nl="urn:example:nl">
-          <nl:interface-name>GigabitEthernet0/1</nl:interface-name>
-          <nl:interface-type>gigabitEthernet</nl:interface-type>
-          <nl:ip-address>192.168.1.1</nl:ip-address>
-        </nl:network-layer-termination-point-attributes>
-      </nt:termination-point>
 
-      <nl:network-layer-node-attributes xmlns:nl="urn:example:nl">
-        <nl:node-name>Node-A</nl:node-name>
-        <nl:node-type>router</nl:node-type>
-      </nl:network-layer-node-attributes>
-
+      <device-layer:device-layer-node-attributes xmlns:device-layer="urn:ietf:params:xml:ns:yang:device-layer">
+        <device-layer:device-name>Device-1</device-layer:device-name>
+        <device-layer:device-type>camera</device-layer:device-type>
+      </device-layer:device-layer-node-attributes>
+      
+      <ietf-network-topology:termination-point xmlns:ietf-network-topology="urn:ietf:params:xml:ns:yang:ietf-network-topology">
+        <ietf-network-topology:tp-id>tp-1</ietf-network-topology:tp-id>
+        <ietf-network-topology:supporting-termination-point>
+          <ietf-network-topology:network-ref>supporting-network-1</ietf-network-topology:network-ref>
+          <ietf-network-topology:node-ref>supporting-node-1</ietf-network-topology:node-ref>
+          <ietf-network-topology:tp-ref>tp-ref-1</ietf-network-topology:tp-ref>
+        </ietf-network-topology:supporting-termination-point>
+        
+        <device-layer:device-layer-termination-point-attributes xmlns:device-layer="urn:ietf:params:xml:ns:yang:device-layer">
+          <device-layer:port-name>port-1</device-layer:port-name>
+          <device-layer:port-type>rj45</device-layer:port-type>
+          <ethernet-port:ethernet-port xmlns:ethernet-port="urn:ietf:params:xml:ns:yang:ethernet-port">
+            <ethernet-port:port-id>rj45</ethernet-port:port-id>
+            <ethernet-port:mac-address>00:1A:2B:3C:4D:5E</ethernet-port:mac-address>
+            <ethernet-port:speed>1Gbps</ethernet-port:speed>
+            <ethernet-port:duplex-mode>full</ethernet-port:duplex-mode>
+          </ethernet-port:ethernet-port>
+          
+        </device-layer:device-layer-termination-point-attributes>
+        <network-layer:network-layer-termination-point-attributes xmlns:network-layer="urn:ietf:params:xml:ns:yang:network-layer">
+          <network-layer:interface-name>GigabitEthernet01</network-layer:interface-name>
+          <network-layer:interface-type>ip</network-layer:interface-type>
+          <network-layer:ip-address>192.168.1.1</network-layer:ip-address>
+        </network-layer:network-layer-termination-point-attributes>
+      </ietf-network-topology:termination-point>
+      
+      <network-layer:network-layer-node-attributes xmlns:network-layer="urn:ietf:params:xml:ns:yang:network-layer">
+        <network-layer:node-name>Node-A</network-layer:node-name>
+        <network-layer:node-type>generic</network-layer:node-type>
+      </network-layer:network-layer-node-attributes>
     </node>
+    
+    <ietf-network-topology:link xmlns:ietf-network-topology="urn:ietf:params:xml:ns:yang:ietf-network-topology">
+      <ietf-network-topology:link-id>link-1</ietf-network-topology:link-id>
+      
+      <ietf-network-topology:source>
+        <ietf-network-topology:source-node>node-1</ietf-network-topology:source-node>
+        <ietf-network-topology:source-tp>tp-1</ietf-network-topology:source-tp>
+      </ietf-network-topology:source>
+      
+      <ietf-network-topology:destination>
+        <ietf-network-topology:dest-node>node-2</ietf-network-topology:dest-node>
+        <ietf-network-topology:dest-tp>tp-2</ietf-network-topology:dest-tp>
+      </ietf-network-topology:destination>
+      
+      <ietf-network-topology:supporting-link>
+        <ietf-network-topology:network-ref>supporting-network-1</ietf-network-topology:network-ref>
+        <ietf-network-topology:link-ref>supporting-link-1</ietf-network-topology:link-ref>
+      </ietf-network-topology:supporting-link>
+      
+      <device-layer:device-layer-link-attributes xmlns:device-layer="urn:ietf:params:xml:ns:yang:device-layer">
+        <device-layer:physical-link-name>Link-1</device-layer:physical-link-name>
+        <device-layer:physical-link-type>cat5e</device-layer:physical-link-type>
+      </device-layer:device-layer-link-attributes>
+      
+      <network-layer:network-layer-link-attributes xmlns:network-layer="urn:ietf:params:xml:ns:yang:network-layer">
+        <network-layer:link-name>Link-B</network-layer:link-name>
+        <network-layer:link-type>3gpp-5g-qos-flow</network-layer:link-type>
+        <network-layer:_5qi>9</network-layer:_5qi>
+        <network-layer:gfbr>100</network-layer:gfbr>
+        <network-layer:mfbr>200</network-layer:mfbr>
+        <network-layer:pdb>10</network-layer:pdb>
+        <network-layer:per>1</network-layer:per>
+      </network-layer:network-layer-link-attributes>
 
-    <nt:link xmlns:nt="urn:example:nt">
-
-      <nt:link-id>link-1</nt:link-id>
-
-      <nt:source>
-        <nt:source-node>node-1</nt:source-node>
-        <nt:source-tp>tp-1</nt:source-tp>
-      </nt:source>
-
-      <nt:destination>
-        <nt:dest-node>node-2</nt:dest-node>
-        <nt:dest-tp>tp-2</nt:dest-tp>
-      </nt:destination>
-
-      <nt:supporting-link>
-        <nt:network-ref>supporting-network-1</nt:network-ref>
-        <nt:link-ref>supporting-link-1</nt:link-ref>
-      </nt:supporting-link>
-
-      <al:application-layer-link-attributes xmlns:al="urn:example:al">
-        <al:logical-link-name>Link-A</al:logical-link-name>
-        <al:logical-link-type>logical</al:logical-link-type>
-        <al:bitrate>10</al:bitrate>
-      </al:application-layer-link-attributes>
-
-      <dl:device-layer-link-attributes xmlns:dl="urn:example:dl">
-        <dl:physical-link-name>Link-1</dl:physical-link-name>
-        <dl:physical-link-type>fiber</dl:physical-link-type>
-      </dl:device-layer-link-attributes>
-
-      <nl:network-layer-link-attributes xmlns:nl="urn:example:nl">
-        <nl:link-name>Link-B</nl:link-name>
-        <nl:link-type>ip-link</nl:link-type>
-        <nl:_5qi>9</nl:_5qi>
-        <nl:gfbr>100</nl:gfbr>
-        <nl:mfbr>200</nl:mfbr>
-        <nl:pdb>10</nl:pdb>
-        <nl:per>0.1</nl:per>
-      </nl:network-layer-link-attributes>
-
-    </nt:link>
-
+    </ietf-network-topology:link>
   </network>
-
 </networks>
