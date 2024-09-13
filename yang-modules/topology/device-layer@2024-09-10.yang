@@ -117,8 +117,7 @@ module device-layer {
                     enum radio;
                     enum rj45;
                     enum usb-micro;
-                    enum usb-a-20;
-                    enum usb-a-30;
+                    enum usb-a;
                     enum usb-c;
                     enum generic;
                 }
