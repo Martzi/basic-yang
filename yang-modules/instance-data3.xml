@@ -1,4 +1,5 @@
 <networks xmlns="urn:ietf:params:xml:ns:yang:ietf-network">
+
   <network>
     <network-id>network-1</network-id>
     <network-types>
@@ -26,6 +27,7 @@
       
       <ietf-network-topology:termination-point xmlns:ietf-network-topology="urn:ietf:params:xml:ns:yang:ietf-network-topology">
         <ietf-network-topology:tp-id>tp-1</ietf-network-topology:tp-id>
+        
         <ietf-network-topology:supporting-termination-point>
           <ietf-network-topology:network-ref>supporting-network-1</ietf-network-topology:network-ref>
           <ietf-network-topology:node-ref>supporting-node-1</ietf-network-topology:node-ref>
@@ -41,19 +43,21 @@
             <ethernet-port:speed>1Gbps</ethernet-port:speed>
             <ethernet-port:duplex-mode>full</ethernet-port:duplex-mode>
           </ethernet-port:ethernet-port>
-          
         </device-layer:device-layer-termination-point-attributes>
+
         <network-layer:network-layer-termination-point-attributes xmlns:network-layer="urn:ietf:params:xml:ns:yang:network-layer">
           <network-layer:interface-name>GigabitEthernet01</network-layer:interface-name>
           <network-layer:interface-type>ip</network-layer:interface-type>
           <network-layer:ip-address>192.168.1.1</network-layer:ip-address>
         </network-layer:network-layer-termination-point-attributes>
+
       </ietf-network-topology:termination-point>
       
       <network-layer:network-layer-node-attributes xmlns:network-layer="urn:ietf:params:xml:ns:yang:network-layer">
         <network-layer:node-name>Node-A</network-layer:node-name>
         <network-layer:node-type>generic</network-layer:node-type>
       </network-layer:network-layer-node-attributes>
+
     </node>
     
     <ietf-network-topology:link xmlns:ietf-network-topology="urn:ietf:params:xml:ns:yang:ietf-network-topology">
