@@ -17,7 +17,7 @@
             <visual>
                 <origin rpy="0 0 0" xyz="0 0 0"/>
                 <geometry>
-                <mesh filename="package://interface_description/meshes/rj45_female.stl" scale="0.001 0.001 0.001"/>
+                <mesh filename="package://interface_description/meshes/rj45-female.stl" scale="0.001 0.001 0.001"/>
                 </geometry>
                 <material name="LightGrey">
                 <color rgba="0.7 0.7 0.7 1.0"/>
@@ -27,7 +27,7 @@
             <collision>
                 <origin xyz="0 0 0" rpy="0 0 0"/>
                 <geometry>
-                <mesh filename="package://interface_description/meshes/rj45_female.stl" scale="0.001 0.001 0.001"/>
+                <mesh filename="package://interface_description/meshes/rj45-female.stl" scale="0.001 0.001 0.001"/>
                 </geometry>
             </collision>
         </link>
