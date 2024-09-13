@@ -121,10 +121,12 @@
                         <network-ref>nuc-${id}-usb-supporting-network</network-ref>
                         <node-ref>nuc-${id}-usb-supporting-node</node-ref>
                     </supporting-node>
-                    
-                    <xacro:usb30 parent="world" id="0" />
-                </node>
-
+                </node>    
+            </network> 
+        </yang>
+        <xacro:usb30 parent="world" id="0" />
+        <yang>
+            <network>
                 <node>
                     <node-id>nuc-${id}-cat6-node</node-id>
                     <supporting-node>
@@ -137,10 +139,9 @@
                         <dl:device-type>nuc</dl:device-type>
                     </dl:device-layer-node-attributes>
 
-                    <xacro:cat6 parent="world" id="0" />
-                </node>
-
-            </network>
+                </node>    
+            </network> 
         </yang>
+        <xacro:cat6 parent="world" id="0" />
     </xacro:macro>
 </robot>
