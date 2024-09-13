@@ -49,7 +49,7 @@
                     <ethernet-port:ethernet-port xmlns:ethernet-port="urn:ietf:params:xml:ns:yang:ethernet-port">
                         <ethernet-port:port-id>eth-${id}</ethernet-port:port-id>
                         <ethernet-port:mac-address>00:1A:2B:3C:4D:5E</ethernet-port:mac-address>
-                        <ethernet-port:speed>1000Mbps</ethernet-port:speed>
+                        <ethernet-port:speed>1Gbps</ethernet-port:speed>
                         <ethernet-port:duplex-mode>full</ethernet-port:duplex-mode>
                     </ethernet-port:ethernet-port>
 
