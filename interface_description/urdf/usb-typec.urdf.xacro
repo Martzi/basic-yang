@@ -33,55 +33,29 @@
         </link>
 
         <yang>
-            <!-- usb-typec network topology -->
-            <!-- <network> -->
-                <!-- <network-id>usb-typec-${id}-network</network-id>
-                <network-types>
-                    <dl:device-layer-topology xmlns:dl="urn:ietf:params:xml:ns:yang:device-layer"/>
-                </network-types>
-                
-                <supporting-network>
-                    <network-ref>usb-typec-${id}-supporting-network</network-ref>
-                </supporting-network>
-                
-                <node>
-                    <node-id>usb-typec-${id}-node</node-id>
-                    <supporting-node>
-                        <network-ref>usb-typec-${id}-supporting-network</network-ref>
-                        <node-ref>usb-typec-${id}-supporting-node</node-ref>
-                    </supporting-node>
-                    <dl:device-layer-node-attributes xmlns:dl="urn:ietf:params:xml:ns:yang:device-layer">
-                        <dl:device-name>usb-typec-${id}-device</dl:device-name>
-                        <dl:device-type>usb-typec-${id}-port</dl:device-type>
-                    </dl:device-layer-node-attributes> -->
-
-                    <!-- lehet h csak innentol kene? -->
-                    <nt:termination-point xmlns:nt="urn:ietf:params:xml:ns:yang:ietf-network-topology">
-                        <nt:tp-id>tp-1</nt:tp-id>
+            <ietf-network-topology:termination-point xmlns:ietf-network-topology="urn:ietf:params:xml:ns:yang:ietf-network-topology">
+                <ietf-network-topology:tp-id>tp-1</ietf-network-topology:tp-id>
                         
-                        <nt:supporting-termination-point>
-                            <nt:network-ref>supporting-network-1</nt:network-ref>
-                            <nt:node-ref>supporting-node-1</nt:node-ref>
-                            <nt:tp-ref>tp-ref-1</nt:tp-ref>
-                        </nt:supporting-termination-point>
+                <ietf-network-topology:supporting-termination-point>
+                    <ietf-network-topology:network-ref>supporting-network-1</ietf-network-topology:network-ref>
+                    <ietf-network-topology:node-ref>supporting-node-1</ietf-network-topology:node-ref>
+                    <ietf-network-topology:tp-ref>tp-ref-1</ietf-network-topology:tp-ref>
+                </ietf-network-topology:supporting-termination-point>
                         
-                        <dl:device-layer-termination-point-attributes xmlns:dl="urn:ietf:params:xml:ns:yang:device-layer">
-                            <dl:port-name>port-1</dl:port-name>
-                            <dl:port-type>usb-c</dl:port-type>
-                            <usb:usb-port xmlns:usb="urn:ietf:params:xml:ns:yang:usb-port">
-                                <usb:port-id>usb-typec-${id}</usb:port-id>
-                                <usb:version>USB3.2</usb:version>
-                                <usb:speed>5.00</usb:speed>
-                                <usb:power-consumption>2.5</usb:power-consumption>
-                            </usb:usb-port>
+                <device-layer:device-layer-termination-point-attributes xmlns:device-layer="urn:ietf:params:xml:ns:yang:device-layer">
+                    <device-layer:port-name>port-1</device-layer:port-name>
+                    <device-layer:port-type>usb-c</device-layer:port-type>
+                    
+                    <usb-port:usb-port xmlns:usb-port="urn:ietf:params:xml:ns:yang:usb-port">
+                        <usb-port:port-id>usb-typec-${id}</usb-port:port-id>
+                        <usb-port:version>USB3.2</usb-port:version>
+                        <usb-port:speed>5.00</usb-port:speed>
+                        <usb-port:power-consumption>2.5</usb-port:power-consumption>
+                    </usb-port:usb-port>
                             
-                        </dl:device-layer-termination-point-attributes>
-                    </nt:termination-point>
-                    <!-- lehet h csak idaig kene? -->
-                <!-- </node> -->
-            <!-- </network> -->
+                </device-layer:device-layer-termination-point-attributes>
+            </ietf-network-topology:termination-point>
         </yang>
-    
     </xacro:macro>
 
 </robot>

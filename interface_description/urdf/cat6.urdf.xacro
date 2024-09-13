@@ -32,53 +32,29 @@
             </collision>
         </link>
 
-
         <yang>
-            <!-- cat6 network topology -->
-            <!-- <network>
-                <network-id>cat6-${id}-network</network-id>
-                <network-types>
-                    <dl:device-layer-topology xmlns:dl="urn:ietf:params:xml:ns:yang:device-layer"/>
-                </network-types>
-                
-                <supporting-network>
-                    <network-ref>cat6-${id}-supporting-network</network-ref>
-                </supporting-network>
-                
-                <node>
-                    <node-id>cat6-${id}-node</node-id>
-                    <supporting-node>
-                        <network-ref>cat6-${id}-supporting-network</network-ref>
-                        <node-ref>cat6-${id}-supporting-node</node-ref>
-                    </supporting-node>
-                    <dl:device-layer-node-attributes xmlns:dl="urn:ietf:params:xml:ns:yang:device-layer">
-                        <dl:device-name>cat6-${id}-interface</dl:device-name>
-                        <dl:device-type>port</dl:device-type>
-                    </dl:device-layer-node-attributes> -->
+            <ietf-network-topology:termination-point xmlns:ietf-network-topology="urn:ietf:params:xml:ns:yang:ietf-network-topology">
+                <ietf-network-topology:tp-id>tp-1</ietf-network-topology:tp-id>
+                        
+                <ietf-network-topology:supporting-termination-point>
+                    <ietf-network-topology:network-ref>supporting-network-1</ietf-network-topology:network-ref>
+                    <ietf-network-topology:node-ref>supporting-node-1</ietf-network-topology:node-ref>
+                    <ietf-network-topology:tp-ref>tp-ref-1</ietf-network-topology:tp-ref>
+                </ietf-network-topology:supporting-termination-point>
+                        
+                <device-layer:device-layer-termination-point-attributes xmlns:device-layer="urn:ietf:params:xml:ns:yang:device-layer">
+                    <device-layer:port-name>rj45-${id}</device-layer:port-name>
+                    <device-layer:port-type>rj45</device-layer:port-type>
                     
-                    <nt:termination-point xmlns:nt="urn:ietf:params:xml:ns:yang:ietf-network-topology">
-                        <nt:tp-id>tp-1</nt:tp-id>
-                        
-                        <nt:supporting-termination-point>
-                            <nt:network-ref>supporting-network-1</nt:network-ref>
-                            <nt:node-ref>supporting-node-1</nt:node-ref>
-                            <nt:tp-ref>tp-ref-1</nt:tp-ref>
-                        </nt:supporting-termination-point>
-                        
-                        <dl:device-layer-termination-point-attributes xmlns:dl="urn:ietf:params:xml:ns:yang:device-layer">
-                            <dl:port-name>rj45-${id}</dl:port-name>
-                            <dl:port-type>rj45</dl:port-type>
-                            <eth:ethernet-port xmlns:eth="urn:ietf:params:xml:ns:yang:ethernet-port">
-                                <eth:port-id>eth-${id}</eth:port-id>
-                                <eth:mac-address>00:1A:2B:3C:4D:5E</eth:mac-address>
-                                <eth:speed>1000Mbps</eth:speed>
-                                <eth:duplex-mode>full</eth:duplex-mode>
-                            </eth:ethernet-port>
+                    <ethernet-port:ethernet-port xmlns:ethernet-port="urn:ietf:params:xml:ns:yang:ethernet-port">
+                        <ethernet-port:port-id>eth-${id}</ethernet-port:port-id>
+                        <ethernet-port:mac-address>00:1A:2B:3C:4D:5E</ethernet-port:mac-address>
+                        <ethernet-port:speed>1000Mbps</ethernet-port:speed>
+                        <ethernet-port:duplex-mode>full</ethernet-port:duplex-mode>
+                    </ethernet-port:ethernet-port>
 
-                        </dl:device-layer-termination-point-attributes>
-                    </nt:termination-point>
-                <!-- </node>
-            </network> -->
+                </device-layer:device-layer-termination-point-attributes>
+            </ietf-network-topology:termination-point>
         </yang>
     </xacro:macro>
 
