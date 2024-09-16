@@ -31,19 +31,30 @@ class instance_validator(Node):
 
         # # load namespace into yang content to start with
         # yang_xml_data = urdf_first_two_lines ##### HA kell az első 2 sor
-        yang_xml_data = '<networks xmlns="urn:ietf:params:xml:ns:yang:ietf-network">'
+        # yang_xml_data = '<networks xmlns="urn:ietf:params:xml:ns:yang:ietf-network">'
 
         # Use a regular expression to find all content between <yang> and </yang> tags
-        matches = re.findall(r'<yang>(.*?)</yang>', robot_description, re.DOTALL)
+        # matches = re.findall(r'<yang>(.*?)</yang>', robot_description, re.DOTALL)
 
-        for match in matches:
+        pattern = r'<(link|joint)[^>]*>.*?</\1>'
+
+        remove_robot_tags_pattern = r'</?robot[^>]*>'
+
+
+        cleaned_content = re.sub(pattern, '', robot_description, flags=re.DOTALL)
+
+        cleaned_content = re.sub(remove_robot_tags_pattern, '', cleaned_content)
+
+
+        # for match in matches:
             # self.get_logger().info(f'Received Robot Description:\n{match}')
-            yang_xml_data = yang_xml_data + '' + match
+            # yang_xml_data = yang_xml_data + '' + match
 
         
         # close the opening robot tag manually
-        yang_xml_data = yang_xml_data + '</networks>' # HA kell az első 2 sor akkor ez is 
+        yang_xml_data += cleaned_content + '</networks>' # HA kell az első 2 sor akkor ez is 
 
+        yang_xml_data = yang_xml_data.replace('<?xml version="1.0" ?>', '<?xml version="1.0" ?><networks xmlns="urn:ietf:params:xml:ns:yang:ietf-network">')
 
         print(yang_xml_data)
         return yang_xml_data
@@ -85,8 +96,8 @@ class instance_validator(Node):
             "yanglint", "-ii", "-t", "data", "-s", "-p", 
             "src/yang-modules/standard-modules/ietf-network-topology@2018-02-26.yang", 
             "src/yang-modules/standard-modules/ietf-network@2018-02-26.yang", 
-            "src/yang-modules/interfaces/ethernet-port.yang", 
-            "src/yang-modules/interfaces/usb-port.yang",
+            "src/yang-modules/topology/ethernet-port@2024-09-09.yang", 
+            "src/yang-modules/topology/usb-port@2024-09-09.yang",
             "src/yang-modules/topology/device-layer@2024-09-10.yang",
             "src/yang-modules/topology/network-layer@2024-07-24.yang",
             "src/yang-modules/yang_content.xml"
