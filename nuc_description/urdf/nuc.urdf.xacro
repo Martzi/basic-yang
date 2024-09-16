@@ -102,7 +102,6 @@
             </collision>
         </link>
 
-        <yang>
             <!-- NUC network topology -->
             <network>
                 <network-id>nuc-${id}-network</network-id>
@@ -111,37 +110,25 @@
                     <dl:device-layer-topology xmlns:dl="urn:ietf:params:xml:ns:yang:device-layer"/>
                 </network-types>
 
-                <supporting-network>
-                    <network-ref>nuc-${id}-supporting-network</network-ref>
-                </supporting-network>
-
                 <node>
                     <node-id>nuc-${id}-usb-node</node-id>
-                    <supporting-node>
-                        <network-ref>nuc-${id}-usb-supporting-network</network-ref>
-                        <node-ref>nuc-${id}-usb-supporting-node</node-ref>
-                    </supporting-node>
-                </node>    
-            </network> 
-        </yang>
-        <xacro:usb30 parent="world" id="0" />
-        <yang>
-            <network>
+
+                    <xacro:usb30 parent="world" id="0" />
+   
+                </node>
+
                 <node>
                     <node-id>nuc-${id}-cat6-node</node-id>
-                    <supporting-node>
-                        <network-ref>nuc-${id}-cat6-supporting-network</network-ref>
-                        <node-ref>nuc-${id}-cat6-supporting-node</node-ref>
-                    </supporting-node>
                                 
                     <dl:device-layer-node-attributes xmlns:dl="urn:ietf:params:xml:ns:yang:device-layer">
                         <dl:device-name>nuc-${id}</dl:device-name>
-                        <dl:device-type>nuc</dl:device-type>
+                        <dl:device-type>pc</dl:device-type>
                     </dl:device-layer-node-attributes>
 
-                </node>    
-            </network> 
-        </yang>
-        <xacro:cat6 parent="world" id="0" />
+                    <xacro:cat6 parent="world" id="0" />
+                </node>
+
+            </network>
+        
     </xacro:macro>
 </robot>

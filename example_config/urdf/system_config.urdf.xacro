@@ -4,8 +4,7 @@
       xmlns:ietf-network="urn:ietf:params:xml:ns:yang:ietf-network"
       xmlns:ietf-network-topology="urn:ietf:params:xml:ns:yang:ietf-network-topology"
       xmlns:device-layer="urn:ietf:params:xml:ns:yang:device-layer"
-      xmlns:network-layer="urn:ietf:params:xml:ns:yang:network-layer"
-      xmlns:application-layer="urn:ietf:params:xml:ns:yang:application-layer">
+      xmlns:network-layer="urn:ietf:params:xml:ns:yang:network-layer">
 
 
     <link name="world" />
@@ -17,13 +16,22 @@
     <xacro:include filename="$(find realsense2_description)/urdf/_d455.urdf.xacro" />
 
 
+    <!-- instantiate d455 camera -->
     <xacro:sensor_d455 parent="world">
         <origin xyz="-0.022 -0.039 -0.01" rpy="0 1.57 0" />
     </xacro:sensor_d455>
 
+    <!-- instantiate nuc -->
     <xacro:nuc parent="world" id="0" />
 
-    <yang>
+
+    <network>
+        <network-id>device-layer-network</network-id>
+        <network-types>
+            <dl:device-layer-topology
+                xmlns:dl="urn:ietf:params:xml:ns:yang:device-layer"/>
+        </network-types>
+        
         <ietf-network-topology:link xmlns:ietf-network-topology="urn:ietf:params:xml:ns:yang:ietf-network-topology">
             <ietf-network-topology:link-id>link-1</ietf-network-topology:link-id>
             
@@ -37,28 +45,12 @@
                 <ietf-network-topology:dest-tp>tp-2</ietf-network-topology:dest-tp>
             </ietf-network-topology:destination>
             
-            <ietf-network-topology:supporting-link>
-                <ietf-network-topology:network-ref>supporting-network-1</ietf-network-topology:network-ref>
-                <ietf-network-topology:link-ref>supporting-link-1</ietf-network-topology:link-ref>
-            </ietf-network-topology:supporting-link>
-            
             <device-layer:device-layer-link-attributes xmlns:device-layer="urn:ietf:params:xml:ns:yang:device-layer">
                 <device-layer:physical-link-name>Link-1</device-layer:physical-link-name>
                 <device-layer:physical-link-type>cat5e</device-layer:physical-link-type>
             </device-layer:device-layer-link-attributes>
-            
-            <network-layer:network-layer-link-attributes xmlns:network-layer="urn:ietf:params:xml:ns:yang:network-layer">
-                <network-layer:link-name>Link-B</network-layer:link-name>
-                <network-layer:link-type>3gpp-5g-qos-flow</network-layer:link-type>
-                <network-layer:_5qi>9</network-layer:_5qi>
-                <network-layer:gfbr>100</network-layer:gfbr>
-                <network-layer:mfbr>200</network-layer:mfbr>
-                <network-layer:pdb>10</network-layer:pdb>
-                <network-layer:per>1</network-layer:per>
-            </network-layer:network-layer-link-attributes>
 
         </ietf-network-topology:link>
-
-    </yang>
+    </network>
 
 </robot>

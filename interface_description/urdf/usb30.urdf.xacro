@@ -32,15 +32,8 @@
             </collision>
         </link>
 
-        <yang>
             <ietf-network-topology:termination-point xmlns:ietf-network-topology="urn:ietf:params:xml:ns:yang:ietf-network-topology">
                 <ietf-network-topology:tp-id>tp-1</ietf-network-topology:tp-id>
-                        
-                <ietf-network-topology:supporting-termination-point>
-                    <ietf-network-topology:network-ref>supporting-network-1</ietf-network-topology:network-ref>
-                    <ietf-network-topology:node-ref>supporting-node-1</ietf-network-topology:node-ref>
-                    <ietf-network-topology:tp-ref>tp-ref-1</ietf-network-topology:tp-ref>
-                </ietf-network-topology:supporting-termination-point>
                         
                 <dl:device-layer-termination-point-attributes xmlns:dl="urn:ietf:params:xml:ns:yang:device-layer">
                     <dl:port-name>port-1</dl:port-name>
@@ -55,7 +48,6 @@
                             
                 </dl:device-layer-termination-point-attributes>
             </ietf-network-topology:termination-point>
-        </yang>
     </xacro:macro>
 
 </robot>
