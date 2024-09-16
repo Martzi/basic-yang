@@ -1,4 +1,5 @@
 module usb3-port {
+  yang-version 1.1;
   namespace "urn:ietf:params:xml:ns:yang:usb3-port";
   prefix "usb3";
 
@@ -6,10 +7,17 @@ module usb3-port {
     prefix "usb";
   }
 
+  organization
+    "HSN-Lab & Ericsson Research Hungary";
+
+  contact
+    "Editor:     Marcell Balogh
+    <mailto:balogh.marcell@edu.bme.hu>";
+
   description
     "This module augments the generic USB port with USB3.0-specific parameters.";
 
-  revision "2024-09-09" {
+  revision 2024-09-09 {
     description "Initial revision.";
   }
 

@@ -1,33 +1,37 @@
 module ethernet-port {
+  yang-version 1.1;
   namespace "urn:ietf:params:xml:ns:yang:ethernet-port";
-  prefix "eth";
+  prefix eth;
 
   import ietf-network {
-    prefix "nw";
+    prefix nw;
   }
 
   import ietf-network-topology {
-    prefix "nt";
+    prefix nt;
   }
 
   import device-layer {
-    prefix "dl";
+    prefix dl;
   }
 
-  description
-    "This module defines a generic Ethernet port.";
+  organization
+    "HSN-Lab & Ericsson Research Hungary";
 
-  revision "2024-09-09" {
+  contact
+    "Editor:     Marcell Balogh
+    <mailto:balogh.marcell@edu.bme.hu>";
+
+  description
+    "This module defines a generic Ethernet port with default values.";
+
+  revision 2024-09-09 {
     description "Initial revision.";
   }
 
   augment "/nw:networks/nw:network/nw:node/nt:termination-point/dl:device-layer-termination-point-attributes"{
     when "/nw:networks/nw:network/nw:network-types/dl:device-layer-topology" {
     }
-    description
-      "Extends the device port types
-      with ethernet port";
-
     container ethernet-port {
       description "Generic Ethernet port configuration";
 

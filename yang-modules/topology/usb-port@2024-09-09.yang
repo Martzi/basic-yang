@@ -1,23 +1,31 @@
 module usb-port {
+  yang-version 1.1;
   namespace "urn:ietf:params:xml:ns:yang:usb-port";
-  prefix "usb";
+  prefix usb;
 
   import ietf-network {
-    prefix "nw";
+    prefix nw;
   }
 
   import ietf-network-topology {
-    prefix "nt";
+    prefix nt;
   }
 
   import device-layer {
-    prefix "dl";
+    prefix dl;
   }
+
+  organization
+    "HSN-Lab & Ericsson Research Hungary";
+
+  contact
+    "Editor:     Marcell Balogh
+    <mailto:balogh.marcell@edu.bme.hu>";
 
   description
     "This module defines a generic USB port with default values.";
 
-  revision "2024-09-09" {
+  revision 2024-09-09 {
     description "Initial revision.";
   }
 
