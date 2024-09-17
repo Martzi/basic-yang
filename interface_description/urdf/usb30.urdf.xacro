@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <robot xmlns:xacro="http://ros.org/wiki/xacro"
-       xmlns:ietf-network-topology="urn:ietf:params:xml:ns:yang:ietf-network-topology"
-       xmlns:device-layer="urn:ietf:params:xml:ns:yang:device-layer"
-       xmlns:usb-port="urn:ietf:params:xml:ns:yang:usb-port"
        name="usb30">
 
     <xacro:macro name="usb30" params="parent id:=0">
@@ -32,22 +29,22 @@
             </collision>
         </link>
 
-            <ietf-network-topology:termination-point xmlns:ietf-network-topology="urn:ietf:params:xml:ns:yang:ietf-network-topology">
-                <ietf-network-topology:tp-id>tp-1</ietf-network-topology:tp-id>
+        <nt:termination-point xmlns:nt="urn:ietf:params:xml:ns:yang:ietf-network-topology">
+            <nt:tp-id>tp-1</nt:tp-id>
+                    
+            <dl:device-layer-termination-point-attributes xmlns:dl="urn:ietf:params:xml:ns:yang:device-layer">
+                <dl:port-name>port-1</dl:port-name>
+                <dl:port-type>usb-a</dl:port-type>
+
+                <usb:usb-port xmlns:usb="urn:ietf:params:xml:ns:yang:usb-port">
+                    <usb:port-id>USB30-${id}</usb:port-id>
+                    <usb:version>USB3.0</usb:version>
+                    <usb:speed>5.00</usb:speed>
+                    <usb:power-consumption>2.5</usb:power-consumption>
+                </usb:usb-port>   
                         
-                <dl:device-layer-termination-point-attributes xmlns:dl="urn:ietf:params:xml:ns:yang:device-layer">
-                    <dl:port-name>port-1</dl:port-name>
-                    <dl:port-type>usb-a</dl:port-type>
-
-                    <usb:usb-port xmlns:usb="urn:ietf:params:xml:ns:yang:usb-port">
-                        <usb:port-id>USB30-${id}</usb:port-id>
-                        <usb:version>USB3.0</usb:version>
-                        <usb:speed>5.00</usb:speed>
-                        <usb:power-consumption>2.5</usb:power-consumption>
-                    </usb:usb-port>   
-                            
-                </dl:device-layer-termination-point-attributes>
-            </ietf-network-topology:termination-point>
+            </dl:device-layer-termination-point-attributes>
+        </nt:termination-point>
+    
     </xacro:macro>
-
 </robot>

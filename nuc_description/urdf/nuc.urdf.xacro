@@ -5,7 +5,7 @@
     <xacro:include filename="$(find interface_description)/urdf/cat6.urdf.xacro"/>
     <xacro:include filename="$(find interface_description)/urdf/usb30.urdf.xacro"/>
 
-    <xacro:macro name="nuc" params="parent id:=0 xyz:= '-1 1 0' ">
+    <xacro:macro name="nuc" params="parent id:=0 xyz:='-1 1 0' ">
 
         <joint name="nuc_${id}_joint" type="fixed">
             <origin xyz="${xyz}" rpy="0 0 0" />
@@ -102,33 +102,23 @@
             </collision>
         </link>
 
-            <!-- NUC network topology -->
-            <network>
-                <network-id>nuc-${id}-network</network-id>
-                
-                <network-types>
-                    <dl:device-layer-topology xmlns:dl="urn:ietf:params:xml:ns:yang:device-layer"/>
-                </network-types>
+        <!-- NUC network topology -->
+        <node>
+            <node-id>nuc-${id}-usb-node</node-id>
 
-                <node>
-                    <node-id>nuc-${id}-usb-node</node-id>
+            <xacro:usb30 parent="world" id="0" />
+        </node>
 
-                    <xacro:usb30 parent="world" id="0" />
-   
-                </node>
+        <node>
+            <node-id>nuc-${id}-cat6-node</node-id>
+                        
+            <dl:device-layer-node-attributes xmlns:dl="urn:ietf:params:xml:ns:yang:device-layer">
+                <dl:device-name>nuc-${id}</dl:device-name>
+                <dl:device-type>pc</dl:device-type>
+            </dl:device-layer-node-attributes>
 
-                <node>
-                    <node-id>nuc-${id}-cat6-node</node-id>
-                                
-                    <dl:device-layer-node-attributes xmlns:dl="urn:ietf:params:xml:ns:yang:device-layer">
-                        <dl:device-name>nuc-${id}</dl:device-name>
-                        <dl:device-type>pc</dl:device-type>
-                    </dl:device-layer-node-attributes>
-
-                    <xacro:cat6 parent="world" id="0" />
-                </node>
-
-            </network>
+            <xacro:cat6 parent="world" id="0" />
+        </node>
         
     </xacro:macro>
 </robot>

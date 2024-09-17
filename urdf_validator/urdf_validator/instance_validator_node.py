@@ -34,30 +34,24 @@ class instance_validator(Node):
         # yang_xml_data = '<networks xmlns="urn:ietf:params:xml:ns:yang:ietf-network">'
 
         # Use a regular expression to find all content between <yang> and </yang> tags
-        # matches = re.findall(r'<yang>(.*?)</yang>', robot_description, re.DOTALL)
+        # matches = re.findall(r'<network>(.*?)</network>', robot_description, re.DOTALL)
+        matches = re.findall(r'(<network\b[^>]*>.*?</network>)', robot_description, re.DOTALL)
 
-        pattern = r'<(link|joint)[^>]*>.*?</\1>'
+        for match in matches:
+            yang_xml_data = yang_xml_data + '' + match
+
+        remove_kinematics_pattern = r'<(link|joint)[^>]*>.*?</\1>'
 
         remove_robot_tags_pattern = r'</?robot[^>]*>'
 
-
-        cleaned_content = re.sub(pattern, '', robot_description, flags=re.DOTALL)
-
+        cleaned_content = re.sub(remove_kinematics_pattern, '', yang_xml_data, flags=re.DOTALL)
         cleaned_content = re.sub(remove_robot_tags_pattern, '', cleaned_content)
+        # frame the content tags manually
+        cleaned_content = '<?xml version="1.0" ?><networks xmlns="urn:ietf:params:xml:ns:yang:ietf-network">' + cleaned_content
+        cleaned_content += '</networks>' # HA kell az első 2 sor akkor ez is 
 
-
-        # for match in matches:
-            # self.get_logger().info(f'Received Robot Description:\n{match}')
-            # yang_xml_data = yang_xml_data + '' + match
-
-        
-        # close the opening robot tag manually
-        yang_xml_data += cleaned_content + '</networks>' # HA kell az első 2 sor akkor ez is 
-
-        yang_xml_data = yang_xml_data.replace('<?xml version="1.0" ?>', '<?xml version="1.0" ?><networks xmlns="urn:ietf:params:xml:ns:yang:ietf-network">')
-
-        print(yang_xml_data)
-        return yang_xml_data
+        print(cleaned_content)
+        return cleaned_content
 
 
     

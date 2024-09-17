@@ -1,6 +1,6 @@
 <nw:networks xmlns:dl="urn:ietf:params:xml:ns:yang:device-layer" xmlns:eth="urn:ietf:params:xml:ns:yang:ethernet-port" xmlns:nt="urn:ietf:params:xml:ns:yang:ietf-network-topology" xmlns:nw="urn:ietf:params:xml:ns:yang:ietf-network" xmlns:usb="urn:ietf:params:xml:ns:yang:usb-port">
   <nw:network>
-    <nw:network-id>camera-network</nw:network-id>
+    <nw:network-id>device-layer-network</nw:network-id>
     <nw:network-types>
       <dl:device-layer-topology />
     </nw:network-types>
@@ -24,12 +24,6 @@
         </dl:device-layer-termination-point-attributes>
       </nt:termination-point>
     </nw:node>
-  </nw:network>
-  <nw:network>
-    <nw:network-id>nuc-0-network</nw:network-id>
-    <nw:network-types>
-      <dl:device-layer-topology />
-    </nw:network-types>
     <nw:node>
       <nw:node-id>nuc-0-usb-node</nw:node-id>
       <nt:termination-point>
@@ -66,12 +60,6 @@
         </dl:device-layer-termination-point-attributes>
       </nt:termination-point>
     </nw:node>
-  </nw:network>
-  <nw:network>
-    <nw:network-id>device-layer-network</nw:network-id>
-    <nw:network-types>
-      <dl:device-layer-topology />
-    </nw:network-types>
     <nt:link>
       <nt:link-id>link-1</nt:link-id>
       <nt:source>
