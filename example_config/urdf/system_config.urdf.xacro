@@ -15,15 +15,6 @@
     <!-- import d455 camera -->
     <xacro:include filename="$(find realsense2_description)/urdf/_d455.urdf.xacro" />
 
-    <!-- instantiate d455 camera -->
-    <xacro:sensor_d455 parent="world">
-        <origin xyz="-0.022 -0.039 -0.01" rpy="0 1.57 0" />
-    </xacro:sensor_d455>
-
-    <!-- instantiate nuc -->
-    <xacro:nuc parent="world" id="0" />
-
-
     <network>
         <network-id>device-layer-network</network-id>
         <network-types>
@@ -32,12 +23,12 @@
         </network-types>
         
         <!-- instantiate d455 camera -->
-        <xacro:sensor_d455 parent="world">
+        <xacro:sensor_d455 parent="world" id="0">
             <origin xyz="-0.022 -0.039 -0.01" rpy="0 1.57 0" />
         </xacro:sensor_d455>
 
         <!-- instantiate nuc -->
-        <xacro:nuc parent="world" id="0" />
+        <xacro:nuc parent="world" id="0" origin_xyz="-1 1 0"/>
 
         <nt:link xmlns:nt="urn:ietf:params:xml:ns:yang:ietf-network-topology">
             <nt:link-id>link-1</nt:link-id>
