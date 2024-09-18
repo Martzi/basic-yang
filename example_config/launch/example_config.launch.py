@@ -1,9 +1,12 @@
 import os
+import re
 import xacro
 
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch_ros.actions import Node
+
+import xml.etree.ElementTree as ET
 
 
 def load_file(package_name, file_path):
@@ -16,6 +19,27 @@ def load_file(package_name, file_path):
         # parent of IOError, OSError *and* WindowsError where available
         return None
 
+# Function to find and remove an element by tag
+def remove_elements_by_tag(root, tag):
+    # Find all parent elements
+    for parent in root.findall(".//*"):
+        # Remove child elements with the matching tag
+        for elem in list(parent):
+            if elem.tag == tag or tag in elem.tag:
+                parent.remove(elem)
+
+# Function to remove network-related elements
+def clean_xml(root):
+    tags_to_remove = ['{urn:ietf:params:xml:ns:yang:ietf-network-topology}termination-point', 
+                      '{urn:ietf:params:xml:ns:yang:ietf-network-topology}link',
+                      '{urn:ietf:params:xml:ns:yang:device-layer}device-layer-node-attributes',
+                      'node-id',
+                      'network-id',
+                      'network-types']
+    
+    # Remove elements based on the tags list
+    for tag in tags_to_remove:
+        remove_elements_by_tag(root, tag)
 
 def generate_launch_description():
     # moveit_cpp.yaml is passed by filename for now since it's node specific
@@ -25,7 +49,6 @@ def generate_launch_description():
     #     'example_config_connections.sdf')
 
     # print(rrbot_gazebo)
-
 
     config_description_path = os.path.join(
         get_package_share_directory('example_config'))
@@ -37,7 +60,29 @@ def generate_launch_description():
     doc = xacro.parse(open(xacro_file))
     xacro.process_doc(doc)
     system_description_config = doc.toxml()
-    robot_description = {'robot_description': system_description_config}
+
+    ############## extracting pure urdf from /robot_description topic
+
+    # Parse the system_description_config XML
+    ET.register_namespace('al', 'urn:ietf:params:xml:ns:yang:application-layer')
+    ET.register_namespace('nl', 'urn:ietf:params:xml:ns:yang:network-layer')
+    ET.register_namespace('dl', 'urn:ietf:params:xml:ns:yang:device-layer')
+    ET.register_namespace('nw', 'urn:ietf:params:xml:ns:yang:ietf-network')
+    ET.register_namespace('nt', 'urn:ietf:params:xml:ns:yang:ietf-network-topology')
+    ET.register_namespace('eth', 'urn:ietf:params:xml:ns:yang:ethernet-port')
+    ET.register_namespace('usb', 'urn:ietf:params:xml:ns:yang:usb-port')
+    root = ET.fromstring(system_description_config)
+
+    clean_xml(root)
+    # Output the cleaned XML with proper formatting
+    cleaned_xml = ET.tostring(root, encoding='unicode', method='xml')
+
+    pattern = r"</?(node|network)>"
+    result = re.sub(pattern, '', cleaned_xml)
+
+    print("system_description_config: ", result)
+
+    robot_description = {'robot_description': result}
 
     robot_description_semantic_config = load_file('example_config',
                                                   os.path.join('config', 'example_config_connections.sdf'))
