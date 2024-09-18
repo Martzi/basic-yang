@@ -5,16 +5,16 @@
     <xacro:include filename="$(find interface_description)/urdf/cat6.urdf.xacro"/>
     <xacro:include filename="$(find interface_description)/urdf/usb30.urdf.xacro"/>
 
-    <xacro:macro name="nuc" params="parent id:=0 xyz:='-1 1 0' ">
+    <xacro:macro name="nuc" params="parent id:=0 origin_xyz:='-1 1 0' ">
 
-        <joint name="nuc_${id}_joint" type="fixed">
-            <origin xyz="${xyz}" rpy="0 0 0" />
+        <joint name="nuc-${id}-joint" type="fixed">
+            <origin xyz="${origin_xyz}" rpy="0 0 0" />
             <!-- <origin xyz="-1 1 0" rpy="0 0 0" /> -->
             <parent link="${parent}"/>
-            <child link="nuc_${id}_link"/>
+            <child link="nuc-${id}-link"/>
         </joint>
 
-        <link name="nuc_${id}_link">
+        <link name="nuc-${id}-link">
             <visual>
                 <origin rpy="0 0 0" xyz="0 0 0"/>
                 <geometry>
@@ -33,80 +33,13 @@
             </collision>
         </link>
 
-        <!-- ethernet-0 -->
-        <joint name="nuc_${id}_rj45_0_frame" type="fixed">
-            <parent link="nuc_${id}_link"/>
-            <child link="nuc_${id}_rj45_0_link"/>
-            <origin xyz="0.04 0.068 0.032" rpy="-1.5707963 0 0"/>
-        </joint>
-
-        <link name="nuc_${id}_rj45_0_link">
-            <visual>
-                <origin xyz="0 0 0" rpy="0 0 0"/>
-                <geometry>
-                <mesh filename="file://$(find interface_description)/meshes/rj45-female.stl" scale="0.001 0.001 0.001" />
-                </geometry>
-            </visual>
-
-            <collision>
-                <origin xyz="0 0 0" rpy="0 0 0"/>
-                <geometry>
-                <mesh filename="file://$(find interface_description)/meshes/rj45-female.stl" scale="0.001 0.001 0.001" />
-                </geometry>
-            </collision>
-        </link>
-
-        <!-- USB-30-0 -->
-        <joint name="nuc_${id}_usb-a-30_0_frame" type="fixed">
-            <parent link="nuc_${id}_link"/>
-            <child link="nuc_${id}_usb-a-30_0_link"/>
-            <origin xyz="0.087 0.119 0.019" rpy="1.5707963 1.5707963 0"/>
-        </joint>
-
-        <link name="nuc_${id}_usb-a-30_0_link">
-            <visual>
-                <origin xyz="0 0 0" rpy="0 0 0"/>
-                <geometry>
-                <mesh filename="file://$(find interface_description)/meshes/usb-A-female.stl" scale="0.001 0.001 0.001" />
-                </geometry>
-            </visual>
-
-            <collision>
-                <origin xyz="0 0 0" rpy="0 0 0"/>
-                <geometry>
-                <mesh filename="file://$(find interface_description)/meshes/usb-A-female.stl" scale="0.001 0.001 0.001" />
-                </geometry>
-            </collision>
-        </link>
-
-        <!-- USB-30-1 -->
-        <joint name="nuc_${id}_usb-a-30_1_frame" type="fixed">
-            <parent link="nuc_${id}_link"/>
-            <child link="nuc_${id}_usb-a-30_1_link"/>
-            <origin xyz="0.075 0.119 0.019" rpy="1.5707963 1.5707963 0"/>
-        </joint>
-
-        <link name="nuc_${id}_usb-a-30_1_link">
-            <visual>
-                <origin xyz="0 0 0" rpy="0 0 0"/>
-                <geometry>
-                <mesh filename="file://$(find interface_description)/meshes/usb-A-female.stl" scale="0.001 0.001 0.001" />
-                </geometry>
-            </visual>
-
-            <collision>
-                <origin xyz="0 0 0" rpy="0 0 0"/>
-                <geometry>
-                <mesh filename="file://$(find interface_description)/meshes/usb-A-female.stl" scale="0.001 0.001 0.001" />
-                </geometry>
-            </collision>
-        </link>
-
         <!-- NUC network topology -->
         <node>
             <node-id>nuc-${id}-usb-node</node-id>
 
-            <xacro:usb30 parent="world" id="0" />
+            <xacro:usb30 parent="nuc-${id}-link" prefix="nuc-${id}" id="0" origin_xyz="0.087 0.119 0.019" origin_rpy="1.57 1.57 0"/>
+            <xacro:usb30 parent="nuc-${id}-link" prefix="nuc-${id}" id="1" origin_xyz="0.075 0.119 0.0199" origin_rpy="1.57 1.57 0"/>
+
         </node>
 
         <node>
@@ -117,8 +50,9 @@
                 <dl:device-type>pc</dl:device-type>
             </dl:device-layer-node-attributes>
 
-            <xacro:cat6 parent="world" id="0" />
+            <xacro:cat6 parent="nuc-${id}-link" prefix="nuc-${id}" id="0" origin_xyz="0.04 0.068 0.032" origin_rpy="-1.5707963 0 0"/>
+
         </node>
-        
+
     </xacro:macro>
 </robot>
