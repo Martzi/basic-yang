@@ -15,11 +15,11 @@
     <!-- import d455 camera -->
     <xacro:include filename="$(find realsense2_description)/urdf/_d455.urdf.xacro" />
 
+    <!-- Device definition in a network -->
     <network>
         <network-id>device-layer-network</network-id>
         <network-types>
-            <dl:device-layer-topology
-                xmlns:dl="urn:ietf:params:xml:ns:yang:device-layer"/>
+            <dl:device-layer-topology xmlns:dl="urn:ietf:params:xml:ns:yang:device-layer"/>
         </network-types>
         
         <!-- instantiate d455 camera -->
@@ -31,21 +31,21 @@
         <xacro:nuc parent="world" id="0" origin_xyz="-1 1 0"/>
 
         <nt:link xmlns:nt="urn:ietf:params:xml:ns:yang:ietf-network-topology">
-            <nt:link-id>link-1</nt:link-id>
+            <nt:link-id>nuc-camera-link</nt:link-id>
             
             <nt:source>
-                <nt:source-node>node-1</nt:source-node>
+                <nt:source-node>nuc-0-usb-node</nt:source-node>
                 <nt:source-tp>tp-1</nt:source-tp>
             </nt:source>
             
             <nt:destination>
-                <nt:dest-node>node-2</nt:dest-node>
+                <nt:dest-node>camera-usb-typec-node</nt:dest-node>
                 <nt:dest-tp>tp-2</nt:dest-tp>
             </nt:destination>
             
             <dl:device-layer-link-attributes xmlns:dl="urn:ietf:params:xml:ns:yang:device-layer">
-                <dl:physical-link-name>Link-1</dl:physical-link-name>
-                <dl:physical-link-type>cat5e</dl:physical-link-type>
+                <dl:physical-link-name>usb-link-1</dl:physical-link-name>
+                <dl:physical-link-type>usb30</dl:physical-link-type>
             </dl:device-layer-link-attributes>
 
         </nt:link>
