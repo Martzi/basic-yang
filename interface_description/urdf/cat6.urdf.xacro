@@ -2,15 +2,15 @@
 <robot xmlns:xacro="http://ros.org/wiki/xacro"
        name="cat6">
 
-    <xacro:macro name="cat6" params="parent id:=0">
+    <xacro:macro name="cat6" params="parent prefix id:=0 origin_xyz origin_rpy">
 
-        <joint name="cat6-${id}_joint" type="fixed">
-            <origin xyz="-1 1 0" rpy="0 0 0" />
+        <joint name="${prefix}-cat6-${id}-joint" type="fixed">
+            <origin xyz="${origin_xyz}" rpy="${origin_rpy}" />
             <parent link="${parent}"/>
-            <child link="cat6-${id}_link"/>
+            <child link="${prefix}-cat6-${id}-link"/>
         </joint>
 
-        <link name="cat6-${id}_link">
+        <link name="${prefix}-cat6-${id}-link">
             <visual>
                 <origin rpy="0 0 0" xyz="0 0 0"/>
                 <geometry>
@@ -30,14 +30,14 @@
         </link>
 
         <nt:termination-point xmlns:nt="urn:ietf:params:xml:ns:yang:ietf-network-topology">
-            <nt:tp-id>tp-1</nt:tp-id>
+            <nt:tp-id>${prefix}-cat6-rj45-${id}</nt:tp-id>
                     
             <dl:device-layer-termination-point-attributes xmlns:dl="urn:ietf:params:xml:ns:yang:device-layer">
                 <dl:port-name>rj45-${id}</dl:port-name>
                 <dl:port-type>rj45</dl:port-type>
                 
                 <eth:ethernet-port xmlns:eth="urn:ietf:params:xml:ns:yang:ethernet-port">
-                    <eth:port-id>eth-${id}</eth:port-id>
+                    <eth:port-id>${prefix}-eth-${id}</eth:port-id>
                     <eth:mac-address>00:1A:2B:3C:4D:5E</eth:mac-address>
                     <eth:speed>1Gbps</eth:speed>
                     <eth:duplex-mode>full</eth:duplex-mode>
