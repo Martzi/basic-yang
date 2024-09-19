@@ -10,7 +10,7 @@ import xml.etree.ElementTree as ET
 class instance_validator(Node):
     def __init__(self):
         super().__init__('urdf_validator_node')
-        self.subscription = self.create_subscription(String, '/robot_description', self.robot_description_callback, 10)
+        self.subscription = self.create_subscription(String, '/system_description', self.robot_description_callback, 10)
         self.get_logger().info("init done")
         return
 
@@ -39,6 +39,8 @@ class instance_validator(Node):
 
         for match in matches:
             yang_xml_data = yang_xml_data + '' + match
+
+        self.get_logger().info(f"robot_description: {robot_description}")
 
         remove_kinematics_pattern = r'<(link|joint)[^>]*>.*?</\1>'
 

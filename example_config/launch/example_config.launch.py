@@ -5,6 +5,11 @@ import xacro
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch_ros.actions import Node
+from launch.substitutions import LaunchConfiguration
+from launch import LaunchDescription
+from launch.actions import DeclareLaunchArgument
+
+
 
 import xml.etree.ElementTree as ET
 
@@ -42,13 +47,6 @@ def clean_xml(root):
         remove_elements_by_tag(root, tag)
 
 def generate_launch_description():
-    # moveit_cpp.yaml is passed by filename for now since it's node specific
-    # rrbot_gazebo = os.path.join(
-    #     get_package_share_directory('example_config'),
-    #     'config',
-    #     'example_config_connections.sdf')
-
-    # print(rrbot_gazebo)
 
     config_description_path = os.path.join(
         get_package_share_directory('example_config'))
@@ -61,7 +59,7 @@ def generate_launch_description():
     xacro.process_doc(doc)
     system_description_config = doc.toxml()
 
-    print("original system_description: ", system_description_config)
+    # print("original system_description: ", system_description_config)
     ############## extracting pure urdf from /robot_description topic
 
     # Parse the system_description_config XML
@@ -81,7 +79,7 @@ def generate_launch_description():
     pattern = r"</?(node|network)>"
     result = re.sub(pattern, '', cleaned_xml)
 
-    print("system_description_config: ", result)
+    # print("system_description_config: ", result)
 
     robot_description = {'robot_description': result}
 
@@ -108,21 +106,18 @@ def generate_launch_description():
         parameters=[robot_description]
     )
 
-    # spawn_entity = Node(package='gazebo_ros', executable='spawn_entity.py',
-    #                     arguments=['-topic', 'robot_description',
-    #                                '-entity', 'rrbot'],
-    #                     output='screen')
+    node_system_publisher = Node(
+        package='example_config',
+        executable='publisher_node',
+        name='publisher_node',
+        output='screen',
+        parameters=[{'data': LaunchConfiguration('data')}]
+    )
 
-    # Static TF
-    # static_tf = Node(package='tf2_ros',
-    #                  executable='static_transform_publisher',
-    #                  name='static_transform_publisher',
-    #                  output='log',
-    #                  arguments=['0.0', '0.0', '0.0', '0.0', '0.0', '0.0', 'world', 'nuc_0_joint'])
 
     return LaunchDescription([
-      node_robot_state_publisher,
-    #   static_tf,
-    #   spawn_entity,
-      rviz_node
+        DeclareLaunchArgument('data', default_value=system_description_config, description='Data to be published'),
+        node_system_publisher,
+        node_robot_state_publisher,
+        rviz_node
     ])

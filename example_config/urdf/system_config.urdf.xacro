@@ -1,11 +1,6 @@
 <?xml version="1.0"?>
 <robot name="example-configuration"
-      xmlns:xacro="http://wiki.ros.org/xacro" 
-      xmlns:ietf-network="urn:ietf:params:xml:ns:yang:ietf-network"
-      xmlns:ietf-network-topology="urn:ietf:params:xml:ns:yang:ietf-network-topology"
-      xmlns:device-layer="urn:ietf:params:xml:ns:yang:device-layer"
-      xmlns:network-layer="urn:ietf:params:xml:ns:yang:network-layer">
-
+      xmlns:xacro="http://wiki.ros.org/xacro">
 
     <link name="world" />
 
