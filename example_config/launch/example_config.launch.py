@@ -61,6 +61,7 @@ def generate_launch_description():
     xacro.process_doc(doc)
     system_description_config = doc.toxml()
 
+    print("original system_description: ", system_description_config)
     ############## extracting pure urdf from /robot_description topic
 
     # Parse the system_description_config XML
