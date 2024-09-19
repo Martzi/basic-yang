@@ -75,20 +75,7 @@ module device-layer {
                     "Name of the device.";
             }
             leaf device-type {
-                type enumeration{
-                    enum pc;
-                    enum router;
-                    enum switch;
-                    enum rpi4;
-                    enum modem;
-                    enum radiodot;
-                    enum flightrack;
-                    enum generic;
-                    enum robot-arm;
-                    enum controlbox;
-                    enum camera;
-                // require-instance true;
-                }
+                type string;
                 description
                     "Used to reference a type of device -- for example, an specific
                     component with custom options.";
@@ -98,7 +85,6 @@ module device-layer {
     
 
     augment "/nw:networks/nw:network/nw:node/nt:termination-point" {
-        // when "../../dl:device-layer-topology" {
         when "/nw:networks/nw:network/nw:network-types/dl:device-layer-topology" {
         }
         description
@@ -113,22 +99,15 @@ module device-layer {
                   "Name of physical port connector. ";
             }
             leaf port-type {
-                type enumeration{
-                    enum radio;
-                    enum rj45;
-                    enum usb-micro;
-                    enum usb-a;
-                    enum usb-c;
-                    enum generic;
-                }
+                type string;
                 description
-                  "Format of physical port connector. E.g., RJ45, USB-C etc.";
+                  "Serves as augmentation target,
+                  Format of physical port connector. E.g., RJ45, USB-C etc.";
             }
         }
     }
 
     augment "/nw:networks/nw:network/nt:link" {
-        // when "../dl:device-layer-topology" {
         when "/nw:networks/nw:network/nw:network-types/dl:device-layer-topology" {
         }
         description
@@ -142,12 +121,7 @@ module device-layer {
                     "Name of physical link.";
             }
             leaf physical-link-type {
-                type enumeration{
-                    enum usb;
-                    enum cat5e;
-                    enum radio;
-                    enum generic;
-                }
+                type string;
                 description
                     "Serves as augmentation target,
                     Types of physical link. E.g, usb, cat5e etc.";

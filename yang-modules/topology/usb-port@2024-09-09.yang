@@ -30,7 +30,7 @@ module usb-port {
   }
 
   augment "/nw:networks/nw:network/nw:node/nt:termination-point/dl:device-layer-termination-point-attributes"{
-    when "/nw:networks/nw:network/nw:network-types/dl:device-layer-topology" {
+    when "/nw:networks/nw:network/nw:node/nt:termination-point/dl:device-layer-termination-point-attributes/dl:port-type = 'usb'"  {
     }
     container usb-port {
       description "Generic USB port";
