@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <robot xmlns:xacro="http://ros.org/wiki/xacro"
-       name="cat6">
+       name="cat5e">
 
-    <xacro:macro name="cat6" params="parent prefix id:=0 origin_xyz origin_rpy">
+    <xacro:macro name="cat5e" params="parent prefix id:=0 origin_xyz origin_rpy">
 
-        <joint name="${prefix}-cat6-${id}-joint" type="fixed">
+        <joint name="${prefix}-cat5e-${id}-joint" type="fixed">
             <origin xyz="${origin_xyz}" rpy="${origin_rpy}" />
             <parent link="${parent}"/>
-            <child link="${prefix}-cat6-${id}-link"/>
+            <child link="${prefix}-cat5e-${id}-link"/>
         </joint>
 
-        <link name="${prefix}-cat6-${id}-link">
+        <link name="${prefix}-cat5e-${id}-link">
             <visual>
                 <origin rpy="0 0 0" xyz="0 0 0"/>
                 <geometry>
-                <mesh filename="package://interface_description/meshes/rj45-female.stl" scale="0.001 0.001 0.001"/>
+                <mesh filename="package://interface_description/meshes/rj45_female.stl" scale="0.001 0.001 0.001"/>
                 </geometry>
                 <material name="LightGrey">
                 <color rgba="0.7 0.7 0.7 1.0"/>
@@ -24,7 +24,7 @@
             <collision>
                 <origin xyz="0 0 0" rpy="0 0 0"/>
                 <geometry>
-                <mesh filename="package://interface_description/meshes/rj45-female.stl" scale="0.001 0.001 0.001"/>
+                <mesh filename="package://interface_description/meshes/rj45_female.stl" scale="0.001 0.001 0.001"/>
                 </geometry>
             </collision>
         </link>

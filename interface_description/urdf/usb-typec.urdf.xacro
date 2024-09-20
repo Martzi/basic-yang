@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <robot xmlns:xacro="http://ros.org/wiki/xacro"
+       xmlns:usb="urn:ietf:params:xml:ns:yang:usb-port"
        name="usb_typec">
 
     <xacro:macro name="usb_typec" params="parent prefix id:=0 origin_xyz origin_rpy">
@@ -32,16 +33,14 @@
         <nt:termination-point xmlns:nt="urn:ietf:params:xml:ns:yang:ietf-network-topology">
             <nt:tp-id>${prefix}-usb-typec-${id}</nt:tp-id>
                     
-            <dl:device-layer-termination-point-attributes xmlns:dl="urn:ietf:params:xml:ns:yang:device-layer">
-                <dl:port-name>port-${id}</dl:port-name>
-                <dl:port-type>usb-c</dl:port-type>
-                
-                <usb:usb-port xmlns:usb="urn:ietf:params:xml:ns:yang:usb-port">
-                    <usb:port-id>${prefix}-usb-typec-${id}</usb:port-id>
-                    <usb:version>USB3.2</usb:version>
-                    <usb:speed>5.00</usb:speed>
-                    <usb:power-consumption>2.5</usb:power-consumption>
-                </usb:usb-port>
+            <dl:device-layer-termination-point-attributes 
+                xmlns:dl="urn:ietf:params:xml:ns:yang:device-layer"
+                xmlns:usb="urn:ietf:params:xml:ns:yang:usb-port">
+                <dl:port-name>${prefix}-port</dl:port-name>
+                <dl:port-type>usb</dl:port-type>
+                <dl:wired>true</dl:wired>
+                <usb:version>usb3.2</usb:version>
+                <usb:power-consumption>2.5</usb:power-consumption>
                         
             </dl:device-layer-termination-point-attributes>
         </nt:termination-point>
