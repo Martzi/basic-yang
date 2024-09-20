@@ -32,13 +32,12 @@ module usb2-port {
       description "Maximum current for USB2.0 port.";
     }
 
-    leaf signaling-rate {
+    leaf speed {
       type decimal64 {
         fraction-digits 2;
       }
-      units "Mbps";
-      default "480";  // Default signaling rate for USB2.0 in Mbps
-      description "Signaling rate of USB2.0.";
+      default "0.48";  
+      description "Maximum speed of the port in Gbps.";
     }
   }
 }

@@ -101,8 +101,12 @@ module device-layer {
             leaf port-type {
                 type string;
                 description
-                  "Serves as augmentation target,
-                  Format of physical port connector. E.g., RJ45, USB-C etc.";
+                  "Format of physical port connector. E.g., RJ45, USB-C etc.";
+            }
+            leaf wired {
+                type string;
+                description
+                  "wired or wireless.";
             }
         }
     }
@@ -126,6 +130,38 @@ module device-layer {
                     "Serves as augmentation target,
                     Types of physical link. E.g, usb, cat5e etc.";
             }
+            leaf cable-length {
+                type uint8;
+                description
+                    " ";
+            }
         }
     }
+    
+    // augment "/nw:networks/nw:network/nt:link/dl:device-layer-link-attributes"{
+    //     when "/nw:networks/nw:network/nw:node/nt:termination-point/dl:device-layer-termination-point-attributes/dl:port-type = 'usb'"  {
+    //     }
+
+    //     leaf source-connector-type {
+    //         type string;
+    //         description
+    //             " ";
+    //     }
+    //     leaf destination-connector-type {
+    //         type string;
+    //         description
+    //             " ";
+    //     }
+    //     leaf max-data-transfer {
+    //         type uint16;
+    //         description
+    //             " ";
+    //     }
+    //     leaf max-power-transfer {
+    //         type uint16;
+    //         description
+    //             " ";
+    //     }
+    // }
+
 }

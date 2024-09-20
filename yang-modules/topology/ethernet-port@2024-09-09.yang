@@ -32,49 +32,33 @@ module ethernet-port {
   augment "/nw:networks/nw:network/nw:node/nt:termination-point/dl:device-layer-termination-point-attributes"{
     when "/nw:networks/nw:network/nw:network-types/dl:device-layer-topology" {
     }
-    container ethernet-port {
-      description "Generic Ethernet port configuration";
+    // leaf port-id {
+    //   type string;
+    //   description "Unique identifier for the Ethernet port.";
+    // }
 
-      leaf port-id {
-        type string;
-        description "Unique identifier for the Ethernet port.";
-      }
+    // leaf speed {
+    //   type enumeration {
+    //     enum "10Mbps" {
+    //       description "10 Mbps Ethernet";
+    //     }
+    //     enum "100Mbps" {
+    //       description "100 Mbps Fast Ethernet";
+    //     }
+    //     enum "1Gbps" {
+    //       description "1 Gbps Gigabit Ethernet";
+    //     }
+    //     enum "10Gbps" {
+    //       description "10 Gbps Ethernet";
+    //     }
+    //   }
+    //   description "Speed of the Ethernet port.";
+    // }
 
-      leaf mac-address {
-        type string;
-        description "MAC address of the Ethernet port.";
-      }
+    // connector-type:
+    //   cat5e
+    //   cat6
 
-      leaf speed {
-        type enumeration {
-          enum "10Mbps" {
-            description "10 Mbps Ethernet";
-          }
-          enum "100Mbps" {
-            description "100 Mbps Fast Ethernet";
-          }
-          enum "1Gbps" {
-            description "1 Gbps Gigabit Ethernet";
-          }
-          enum "10Gbps" {
-            description "10 Gbps Ethernet";
-          }
-        }
-        description "Speed of the Ethernet port.";
-      }
 
-      leaf duplex-mode {
-        type enumeration {
-          enum full {
-            description "Full duplex";
-          }
-          enum half {
-            description "Half duplex";
-          }
-        }
-        default "full";
-        description "Duplex mode of the Ethernet port.";
-      }
-    }
   }
 }
