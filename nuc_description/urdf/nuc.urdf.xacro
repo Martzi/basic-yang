@@ -5,11 +5,10 @@
     <xacro:include filename="$(find interface_description)/urdf/cat6.urdf.xacro"/>
     <xacro:include filename="$(find interface_description)/urdf/usb30.urdf.xacro"/>
 
-    <xacro:macro name="nuc" params="parent id:=0 origin_xyz:='-1 1 0' ">
+    <xacro:macro name="nuc" params="parent id:=0 origin_xyz:='-1 1 0' origin_rpy:='0 0 0' ">
 
         <joint name="nuc-${id}-joint" type="fixed">
-            <origin xyz="${origin_xyz}" rpy="0 0 0" />
-            <!-- <origin xyz="-1 1 0" rpy="0 0 0" /> -->
+            <origin xyz="${origin_xyz}" rpy="${origin_rpy}" />
             <parent link="${parent}"/>
             <child link="nuc-${id}-link"/>
         </joint>
@@ -35,15 +34,7 @@
 
         <!-- NUC network topology -->
         <node>
-            <node-id>nuc-${id}-usb-node</node-id>
-
-            <xacro:usb30 parent="nuc-${id}-link" prefix="nuc-${id}" id="0" origin_xyz="0.087 0.119 0.019" origin_rpy="1.57 1.57 0"/>
-            <xacro:usb30 parent="nuc-${id}-link" prefix="nuc-${id}" id="1" origin_xyz="0.075 0.119 0.0199" origin_rpy="1.57 1.57 0"/>
-
-        </node>
-
-        <node>
-            <node-id>nuc-${id}-cat6-node</node-id>
+            <node-id>nuc-${id}-node</node-id>
                         
             <dl:device-layer-node-attributes xmlns:dl="urn:ietf:params:xml:ns:yang:device-layer">
                 <dl:device-name>nuc-${id}</dl:device-name>
@@ -51,6 +42,9 @@
             </dl:device-layer-node-attributes>
 
             <xacro:cat6 parent="nuc-${id}-link" prefix="nuc-${id}" id="0" origin_xyz="0.04 0.068 0.032" origin_rpy="-1.5707963 0 0"/>
+
+            <xacro:usb30 parent="nuc-${id}-link" prefix="nuc-${id}" id="0" origin_xyz="0.087 0.119 0.019" origin_rpy="1.57 1.57 0"/>
+            <xacro:usb30 parent="nuc-${id}-link" prefix="nuc-${id}" id="1" origin_xyz="0.075 0.119 0.0199" origin_rpy="1.57 1.57 0"/>
 
         </node>
 
