@@ -39,6 +39,7 @@
             <dl:device-layer-node-attributes xmlns:dl="urn:ietf:params:xml:ns:yang:device-layer">
                 <dl:device-name>nuc-${id}</dl:device-name>
                 <dl:device-type>pc</dl:device-type>
+                <dl:weight>1000</dl:weight>
             </dl:device-layer-node-attributes>
 
             <xacro:cat6 parent="nuc-${id}-link" prefix="nuc-${id}" id="0" origin_xyz="0.04 0.068 0.032" origin_rpy="-1.5707963 0 0"/>

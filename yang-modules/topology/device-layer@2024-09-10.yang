@@ -80,6 +80,11 @@ module device-layer {
                     "Used to reference a type of device -- for example, an specific
                     component with custom options.";
             }
+            leaf weight {
+                type string;
+                description
+                    " ";
+            }
         }
     }
     
@@ -137,31 +142,4 @@ module device-layer {
             }
         }
     }
-    
-    // augment "/nw:networks/nw:network/nt:link/dl:device-layer-link-attributes"{
-    //     when "/nw:networks/nw:network/nw:node/nt:termination-point/dl:device-layer-termination-point-attributes/dl:port-type = 'usb'"  {
-    //     }
-
-    //     leaf source-connector-type {
-    //         type string;
-    //         description
-    //             " ";
-    //     }
-    //     leaf destination-connector-type {
-    //         type string;
-    //         description
-    //             " ";
-    //     }
-    //     leaf max-data-transfer {
-    //         type uint16;
-    //         description
-    //             " ";
-    //     }
-    //     leaf max-power-transfer {
-    //         type uint16;
-    //         description
-    //             " ";
-    //     }
-    // }
-
 }
