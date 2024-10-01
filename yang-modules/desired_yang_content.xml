@@ -79,8 +79,8 @@
         <dl:physical-link-name>camera-nuc-usb-cable</dl:physical-link-name>
         <dl:physical-link-type>usb30</dl:physical-link-type>
         <dl:cable-length>2</dl:cable-length> <!-- m -->
-        <usb:source-connector-type>usb30-micro-b-male</dl:source-connector-type>
-        <usb:destination-connector-type>usb30-type-a-male</dl:destination-connector-type>
+        <usb:source-connector-type>usb30-micro-b-male</usb:source-connector-type>
+        <usb:destination-connector-type>usb30-type-a-male</usb:destination-connector-type>
         <usb:max-data-transfer>20</usb:max-data-transfer> <!-- Gbps -->
         <usb:max-power-transfer>15</usb:max-power-transfer> <!-- Watt -->
       </dl:device-layer-link-attributes>
