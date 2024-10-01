@@ -1,2 +1,13 @@
 title: YANG extension for URDF models in ROS2
 theme: minima
+header_pages:
+  - about.md
+
+author:
+  name: Marcell Balogh
+  email: "balogh.marcell@edu.bme.hu"
+
+minima:
+  social_links:
+    - { platform: github,  user_url: "https://github.com/martzi" }
+    - { platform: google_scholar,  user_url: "https://scholar.google.com/citations?user=AoJ_ScIAAAAJ" }
