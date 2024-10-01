@@ -113,23 +113,41 @@
       </nl:network-layer-node-attributes>
 
       <nt:termination-point>
-        <nt:tp-id>tp-1</nt:tp-id>
+        <nt:tp-id>nuc-0-rj45-0</nt:tp-id>
         <nt:supporting-termination-point>
-          <nt:network-ref>net-2</nt:network-ref>
-          <nt:node-ref>node-2</nt:node-ref>
-          <nt:tp-ref>tp-2</nt:tp-ref>
+          <nt:network-ref>device-layer-network</nt:network-ref>
+          <nt:node-ref>nuc-0</nt:node-ref>
+          <nt:tp-ref>nuc-0-rj45-0</nt:tp-ref>
         </nt:supporting-termination-point>
 
         <nl:network-layer-termination-point-attributes>
-          <nl:interface-name>ge0</nl:interface-name>
+          <nl:interface-name>nuc-eth</nl:interface-name>
           <nl:interface-type>ethernet</nl:interface-type>
           <nl:interface-status>up</nl:interface-status>
           <nl:mac-address>00:1A:2B:3C:4D:5E</nl:mac-address>
         </nl:network-layer-termination-point-attributes>
-
       </nt:termination-point>
 
     </nw:node>
+
+    <nt:link>
+      <nt:link-id>link-1</nt:link-id>
+
+      <nt:supporting-link>
+        <nt:network-ref>net-2</nt:network-ref>
+        <nt:link-ref>link-2</nt:link-ref>
+      </nt:supporting-link>
+
+      <nl:network-layer-link-attributes>
+        <nl:link-name>NetLink A</nl:link-name>
+        <nl:link-type>3gpp-5g-qos-flow</nl:link-type>
+        <nl:_5qi>9</nl:_5qi>
+        <nl:gfbr>100</nl:gfbr>
+        <nl:mfbr>150</nl:mfbr>
+        <nl:pdb>10</nl:pdb>
+        <nl:per>0</nl:per>
+      </nl:network-layer-link-attributes>
+    </nt:link>
 
   </nw:network>
 
