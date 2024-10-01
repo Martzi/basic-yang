@@ -1,4 +1,4 @@
-<nw:networks xmlns:dl="urn:ietf:params:xml:ns:yang:device-layer" xmlns:eth="urn:ietf:params:xml:ns:yang:ethernet-port" xmlns:nt="urn:ietf:params:xml:ns:yang:ietf-network-topology" xmlns:nw="urn:ietf:params:xml:ns:yang:ietf-network" xmlns:usb="urn:ietf:params:xml:ns:yang:usb-port">
+<nw:networks xmlns:dl="urn:ietf:params:xml:ns:yang:device-layer" xmlns:nl="urn:ietf:params:xml:ns:yang:network-layer" xmlns:eth="urn:ietf:params:xml:ns:yang:ethernet-port" xmlns:nt="urn:ietf:params:xml:ns:yang:ietf-network-topology" xmlns:nw="urn:ietf:params:xml:ns:yang:ietf-network" xmlns:usb="urn:ietf:params:xml:ns:yang:usb-port">
   <nw:network>
     <nw:network-id>device-layer-network</nw:network-id>
     <nw:network-types>
@@ -87,4 +87,50 @@
     </nt:link>
 
   </nw:network>
+
+  <nw:network>
+    <nw:network-id>network-layer-network</nw:network-id>
+    
+    <nw:network-types>
+      <nl:network-layer-topology />
+    </nw:network-types>
+
+    <nw:supporting-network>
+      <nw:network-ref>device-layer-network</nw:network-ref>
+    </nw:supporting-network>
+
+    <nw:node>
+      <nw:node-id>nuc-supporting</nw:node-id>
+      
+      <nw:supporting-node>
+        <nw:network-ref>device-layer-network</nw:network-ref>
+        <nw:node-ref>nuc-0</nw:node-ref>
+      </nw:supporting-node>
+      
+      <nl:network-layer-node-attributes>
+        <nl:node-name>nuc-control-node</nl:node-name>
+        <nl:node-type>generic</nl:node-type>
+      </nl:network-layer-node-attributes>
+
+      <nt:termination-point>
+        <nt:tp-id>tp-1</nt:tp-id>
+        <nt:supporting-termination-point>
+          <nt:network-ref>net-2</nt:network-ref>
+          <nt:node-ref>node-2</nt:node-ref>
+          <nt:tp-ref>tp-2</nt:tp-ref>
+        </nt:supporting-termination-point>
+
+        <nl:network-layer-termination-point-attributes>
+          <nl:interface-name>ge0</nl:interface-name>
+          <nl:interface-type>ethernet</nl:interface-type>
+          <nl:interface-status>up</nl:interface-status>
+          <nl:mac-address>00:1A:2B:3C:4D:5E</nl:mac-address>
+        </nl:network-layer-termination-point-attributes>
+
+      </nt:termination-point>
+
+    </nw:node>
+
+  </nw:network>
+
 </nw:networks>
