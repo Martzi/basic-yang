@@ -1,10 +1,10 @@
-<nw:networks xmlns:dl="urn:ietf:params:xml:ns:yang:device-layer" xmlns:nt="urn:ietf:params:xml:ns:yang:ietf-network-topology" xmlns:nw="urn:ietf:params:xml:ns:yang:ietf-network" xmlns:usb="urn:ietf:params:xml:ns:yang:usb-port">
+<nw:networks xmlns:dl="urn:ietf:params:xml:ns:yang:device-layer" xmlns:nl="urn:ietf:params:xml:ns:yang:network-layer" xmlns:nt="urn:ietf:params:xml:ns:yang:ietf-network-topology" xmlns:nw="urn:ietf:params:xml:ns:yang:ietf-network" xmlns:usb="urn:ietf:params:xml:ns:yang:usb-port">
   <nw:network>
     <nw:network-id>device-layer-network</nw:network-id>
     <nw:network-types>
       <dl:device-layer-topology />
     </nw:network-types>
-
+    
     <nw:node>
       <nw:node-id>nuc-0-node</nw:node-id>
       <dl:device-layer-node-attributes>
@@ -12,7 +12,7 @@
         <dl:device-type>pc</dl:device-type>
         <dl:weight>1000</dl:weight>
       </dl:device-layer-node-attributes>
-
+      
       <nt:termination-point>
         <nt:tp-id>nuc-0-rj45-0</nt:tp-id>
         <dl:device-layer-termination-point-attributes>
@@ -21,7 +21,7 @@
           <dl:wired>true</dl:wired>
         </dl:device-layer-termination-point-attributes>
       </nt:termination-point>
-
+      
       <nt:termination-point>
         <nt:tp-id>nuc-0-usb30-0</nt:tp-id>
         <dl:device-layer-termination-point-attributes>
@@ -32,7 +32,7 @@
           <usb:power-consumption>2.5</usb:power-consumption>
         </dl:device-layer-termination-point-attributes>
       </nt:termination-point>
-
+      
       <nt:termination-point>
         <nt:tp-id>nuc-0-usb30-1</nt:tp-id>
         <dl:device-layer-termination-point-attributes>
@@ -46,7 +46,38 @@
     </nw:node>
 
     <nw:node>
-      <nw:node-id>camera-0</nw:node-id>
+      <nw:node-id>nuc-0-supporting</nw:node-id>
+     
+      <nw:supporting-node>
+        <nw:network-ref>device-layer-network</nw:network-ref>
+        <nw:node-ref>nuc-0</nw:node-ref>
+      </nw:supporting-node>
+     
+      <nl:network-layer-node-attributes>
+        <nl:node-name>nuc-control-node</nl:node-name>
+        <nl:node-type>generic</nl:node-type>
+      </nl:network-layer-node-attributes>
+      
+      <nt:termination-point>
+        <nt:tp-id>nuc-0-rj45-0</nt:tp-id>
+        <nt:supporting-termination-point>
+          <nt:network-ref>device-layer-network</nt:network-ref>
+          <nt:node-ref>nuc-0</nt:node-ref>
+          <nt:tp-ref>nuc-0-rj45-0</nt:tp-ref>
+        </nt:supporting-termination-point>
+        
+        <nl:network-layer-termination-point-attributes>
+          <nl:interface-name>nuc-eth</nl:interface-name>
+          <nl:interface-type>ethernet</nl:interface-type>
+          <nl:interface-status>up</nl:interface-status>
+          <nl:mac-address>00:1A:2B:3C:4D:5E</nl:mac-address>
+        </nl:network-layer-termination-point-attributes>
+      </nt:termination-point>
+    
+    </nw:node>
+    
+    <nw:node>
+      <nw:node-id>d455-0</nw:node-id>
       <dl:device-layer-node-attributes>
         <dl:device-name>realsense-d455-camera</dl:device-name>
         <dl:device-type>d455</dl:device-type>
@@ -54,9 +85,9 @@
       </dl:device-layer-node-attributes>
       
       <nt:termination-point>
-        <nt:tp-id>camera-0-usb-typec-0</nt:tp-id>
+        <nt:tp-id>d455-0-usb-typec-0</nt:tp-id>
         <dl:device-layer-termination-point-attributes>
-          <dl:port-name>camera-0-port</dl:port-name>
+          <dl:port-name>d455-0-usb-typec</dl:port-name>
           <dl:port-type>usb</dl:port-type>
           <dl:wired>true</dl:wired>
           <usb:version>usb3.2</usb:version>
@@ -64,16 +95,20 @@
         </dl:device-layer-termination-point-attributes>
       </nt:termination-point>
     </nw:node>
+    
     <nt:link>
       <nt:link-id>nuc-0-camera-0-link</nt:link-id>
+      
       <nt:source>
         <nt:source-node>camera-0</nt:source-node>
         <nt:source-tp>camera-0-usb-typec-0</nt:source-tp>
       </nt:source>
+      
       <nt:destination>
         <nt:dest-node>nuc-0</nt:dest-node>
         <nt:dest-tp>nuc-0-usb30-0</nt:dest-tp>
       </nt:destination>
+      
       <dl:device-layer-link-attributes>
         <dl:physical-link-name>camera-nuc-usb-cable</dl:physical-link-name>
         <dl:physical-link-type>usb30</dl:physical-link-type>
@@ -83,6 +118,52 @@
         <usb:max-data-transfer>20</usb:max-data-transfer>
         <usb:max-power-transfer>15</usb:max-power-transfer>
       </dl:device-layer-link-attributes>
+
     </nt:link>
+  </nw:network>
+  
+  <nw:network>
+    <nw:network-id>network-layer-network</nw:network-id>
+    
+    <nw:network-types>
+      <nl:network-layer-topology />
+    </nw:network-types>
+    
+    <nw:supporting-network>
+      <nw:network-ref>device-layer-network</nw:network-ref>
+    </nw:supporting-network>
+    
+    <nw:node>
+      <nw:node-id>nuc-supporting</nw:node-id>
+      
+      <nw:supporting-node>
+        <nw:network-ref>device-layer-network</nw:network-ref>
+        <nw:node-ref>nuc-0</nw:node-ref>
+      </nw:supporting-node>
+    
+      <nl:network-layer-node-attributes>
+        <nl:node-name>nuc-control-node</nl:node-name>
+        <nl:node-type>generic</nl:node-type>
+      </nl:network-layer-node-attributes>
+    
+      <nt:termination-point>
+        <nt:tp-id>nuc-0-rj45-0</nt:tp-id>
+    
+        <nt:supporting-termination-point>
+          <nt:network-ref>device-layer-network</nt:network-ref>
+          <nt:node-ref>nuc-0</nt:node-ref>
+          <nt:tp-ref>nuc-0-rj45-0</nt:tp-ref>
+        </nt:supporting-termination-point>
+    
+        <nl:network-layer-termination-point-attributes>
+          <nl:interface-name>nuc-eth</nl:interface-name>
+          <nl:interface-type>ethernet</nl:interface-type>
+          <nl:interface-status>up</nl:interface-status>
+          <nl:mac-address>00:1A:2B:3C:4D:5E</nl:mac-address>
+        </nl:network-layer-termination-point-attributes>
+    
+      </nt:termination-point>
+    </nw:node>
+  
   </nw:network>
 </nw:networks>
