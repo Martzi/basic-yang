@@ -2,7 +2,8 @@
 <robot xmlns:xacro="http://ros.org/wiki/xacro"
        name="cat5e">
 
-    <xacro:macro name="cat5e" params="parent prefix id:=0 origin_xyz origin_rpy">
+    <xacro:macro name="cat5e" params="parent prefix id:=0 origin_xyz origin_rpy"
+        xmlns:nt="urn:ietf:params:xml:ns:yang:ietf-network-topology">
 
         <joint name="${prefix}-cat5e-${id}-joint" type="fixed">
             <origin xyz="${origin_xyz}" rpy="${origin_rpy}" />

@@ -3,7 +3,8 @@
        xmlns:usb="urn:ietf:params:xml:ns:yang:usb-port"
        name="usb_typec">
 
-    <xacro:macro name="usb_typec" params="parent prefix id:=0 origin_xyz origin_rpy">
+    <xacro:macro name="usb_typec" params="parent prefix id:=0 origin_xyz origin_rpy"
+        xmlns:nt="urn:ietf:params:xml:ns:yang:ietf-network-topology">
 
         <joint name="${prefix}-usb-typec-${id}-joint" type="fixed">
             <origin xyz="${origin_xyz}" rpy="${origin_rpy}" />

@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <robot xmlns:xacro="http://ros.org/wiki/xacro"
+       xmlns:nt="urn:ietf:params:xml:ns:yang:ietf-network-topology"
        name="cat6">
 
-    <xacro:macro name="cat6" params="parent prefix id:=0 origin_xyz origin_rpy">
+    <xacro:macro name="cat6" params="parent prefix id:=0 origin_xyz origin_rpy" 
+        xmlns:nt="urn:ietf:params:xml:ns:yang:ietf-network-topology">
 
         <joint name="${prefix}-cat6-${id}-joint" type="fixed">
             <origin xyz="${origin_xyz}" rpy="${origin_rpy}" />
