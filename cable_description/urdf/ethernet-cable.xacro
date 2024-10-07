@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+
+<robot name="ethernet-cable"
+    xmlns:xacro="http://wiki.ros.org/xacro">
+
+    <xacro:macro name="ethernet-cable" params="parent src_port dst_port length src_node:=camera-0 src_tp:=usb-typec-0 dst_node:=d455 dst_tp:=usb30-0 link_type:=usb30 length:=2">
+                                                        <!-- biztos h port?? tp és node alapján adom meg! -->
+
+        <joint name="ethernet-cable-joint" type="fixed">
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <parent link="${src_port}"/>
+            <child link="ethernet-cable-link"/> <!-- kábel csonk -->
+        </joint>
+
+
+        <link name="ethernet-cable-link">
+            <visual>
+                <origin rpy="0 0 0" xyz="0 0 0"/>
+                <geometry>
+                    <cylinder length="${length}" radius="0.001"/> <!-- measure 3D point distances -->
+                </geometry>
+                <material name="Black">
+                    <color rgba="0 0 0 1"/>
+                </material>
+            </visual>
+
+            <collision>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <geometry>
+                    <cylinder length="${length}" radius="0.001"/>
+                </geometry>
+            </collision>
+        </link>
+
+        <!-- todo: dugo tipust kivlasztani mesh-bol -->
+
+        <nt:link xmlns:nt="urn:ietf:params:xml:ns:yang:ietf-network-topology">
+            <nt:link-id>${src_node}-${dst_node}-link</nt:link-id>
+            
+            <nt:source>
+                <nt:source-node>${src_node}</nt:source-node>
+                <nt:source-tp>${src_node}-${src_tp}</nt:source-tp>
+            </nt:source>
+            
+            <nt:destination>
+                <nt:dest-node>${dst_node}</nt:dest-node>
+                <nt:dest-tp>${dst_node}-${dst_tp}</nt:dest-tp>  
+            </nt:destination>
+            
+            <dl:device-layer-link-attributes
+                xmlns:dl="urn:ietf:params:xml:ns:yang:device-layer">
+                <dl:physical-link-name>${src_node}-${dst_node}-cable</dl:physical-link-name>
+                <dl:physical-link-type>${link_type}</dl:physical-link-type>
+                <dl:cable-length>${length}</dl:cable-length> 
+            </dl:device-layer-link-attributes>
+
+        </nt:link>
+
+    </xacro:macro>
+</robot>

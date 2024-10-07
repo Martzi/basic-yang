@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+
+<robot name="usb-cable"
+    xmlns:xacro="http://wiki.ros.org/xacro">
+
+    <xacro:macro name="usb-cable" params="parent src_port dst_port length">
+
+        <joint name="usb-cable-joint" type="fixed">
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <parent link="${src_port}"/>
+            <child link="usb-cable-link"/> <!-- kábel csonk -->
+        </joint>
+
+
+        <link name="usb-cable-link">
+            <visual>
+                <origin rpy="0 0 0" xyz="0 0 0"/>
+                <geometry>
+                    <cylinder length="${length}" radius="0.001"/> <!-- measure 3D point distances -->
+                </geometry>
+                <material name="Black">
+                    <color rgba="0 0 0 1"/>
+                </material>
+            </visual>
+
+            <collision>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <geometry>
+                    <cylinder length="${length}" radius="0.001"/>
+                </geometry>
+            </collision>
+        </link>
+
+
+
+        <!-- <nt:link xmlns:nt="urn:ietf:params:xml:ns:yang:ietf-network-topology">
+            <nt:link-id>${src_port}-${dst_port}-link</nt:link-id>
+
+            <nt:source>
+                <nt:source-node>${src_port}</nt:source-node>
+                <nt:source-tp>${src_port}-usb30-${src_port}</nt:source-tp>
+            </nt:source>
+
+            <nt:destination>
+                <nt:dest-node>${dst_port}</nt:dest-node>
+                <nt:dest-tp>${dst_port}-usb30-${dst_port}</nt:dest-tp>
+            </nt:destination>
+
+            <dl:device-layer-link-attributes
+                xmlns:usb="urn:ietf:params:xml:ns:yang:usb-port"
+                xmlns:dl="urn:ietf:params:xml:ns:yang:device-layer">
+                <dl:physical-link-name>usb-cable</dl:physical-link-name>
+                <dl:physical-link-type>usb30</dl:physical-link-type>
+                <dl:cable-length>${length}</dl:cable-length>
+                <usb:source-connector-type       -->
+    </xacro:macro>
+</robot>
