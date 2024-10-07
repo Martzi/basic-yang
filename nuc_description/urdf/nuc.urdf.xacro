@@ -1,5 +1,7 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://ros.org/wiki/xacro"
+       xmlns:nl="urn:ietf:params:xml:ns:yang:network-layer"
+       xmlns:nt="urn:ietf:params:xml:ns:yang:ietf-network-topology"
        name="nuc">
    
     <xacro:include filename="$(find interface_description)/urdf/cat6.urdf.xacro"/>
@@ -32,7 +34,7 @@
             </collision>
         </link>
 
-        <!-- NUC network topology -->
+        <!-- NUC device-layer topology -->
         <node>
             <node-id>nuc-${id}-node</node-id>
                         
@@ -46,6 +48,38 @@
 
             <xacro:usb30 parent="nuc-${id}-link" prefix="nuc-${id}" id="0" origin_xyz="0.087 0.119 0.019" origin_rpy="1.57 1.57 0"/>
             <xacro:usb30 parent="nuc-${id}-link" prefix="nuc-${id}" id="1" origin_xyz="0.075 0.119 0.0199" origin_rpy="1.57 1.57 0"/>
+
+        </node>
+
+            <!-- NUC network-layer topology -->
+        <node>
+            <node-id>nuc-${id}-supporting</node-id>
+            
+            <supporting-node>
+                <network-ref>device-layer-network</network-ref>
+                <node-ref>nuc-${id}</node-ref>
+            </supporting-node>
+            
+            <nl:network-layer-node-attributes xmlns:nl="urn:ietf:params:xml:ns:yang:network-layer">
+                <nl:node-name>nuc-control-node</nl:node-name>
+                <nl:node-type>generic</nl:node-type>
+            </nl:network-layer-node-attributes>
+
+            <nt:termination-point xmlns:nt="urn:ietf:params:xml:ns:yang:ietf-network-topology">
+                <nt:tp-id>nuc-0-rj45-0</nt:tp-id>
+                <nt:supporting-termination-point>
+                    <nt:network-ref>device-layer-network</nt:network-ref>
+                    <nt:node-ref>nuc-0</nt:node-ref>
+                    <nt:tp-ref>nuc-0-rj45-0</nt:tp-ref>
+                </nt:supporting-termination-point>
+
+                <nl:network-layer-termination-point-attributes xmlns:nl="urn:ietf:params:xml:ns:yang:network-layer">
+                    <nl:interface-name>nuc-eth</nl:interface-name>
+                    <nl:interface-type>ethernet</nl:interface-type>
+                    <nl:interface-status>up</nl:interface-status>
+                    <nl:mac-address>00:1A:2B:3C:4D:5E</nl:mac-address>
+                </nl:network-layer-termination-point-attributes>
+            </nt:termination-point>
 
         </node>
 
