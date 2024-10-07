@@ -1,6 +1,10 @@
 <?xml version="1.0"?>
 <robot name="example-configuration"
       xmlns:xacro="http://wiki.ros.org/xacro"
+      xmlns:dl="urn:ietf:params:xml:ns:yang:device-layer"
+      xmlns:nl="urn:ietf:params:xml:ns:yang:network-layer"
+      xmlns:nt="urn:ietf:params:xml:ns:yang:ietf-network-topology"
+      xmlns:nw="urn:ietf:params:xml:ns:yang:ietf-network"
       xmlns:usb="urn:ietf:params:xml:ns:yang:usb-port">
 
     <link name="world" />
@@ -40,8 +44,8 @@
             </nt:destination>
             
             <dl:device-layer-link-attributes
-                xmlns:dl="urn:ietf:params:xml:ns:yang:device-layer"
-                xmlns:usb="urn:ietf:params:xml:ns:yang:usb-port">
+                xmlns:usb="urn:ietf:params:xml:ns:yang:usb-port"
+                xmlns:dl="urn:ietf:params:xml:ns:yang:device-layer">
                 <dl:physical-link-name>camera-nuc-usb-cable</dl:physical-link-name>
                 <dl:physical-link-type>usb30</dl:physical-link-type>
                 <dl:cable-length>2</dl:cable-length> 
@@ -52,6 +56,49 @@
             </dl:device-layer-link-attributes>
 
         </nt:link>
+    </network>
+
+    <network xmlns:nw="urn:ietf:params:xml:ns:yang:ietf-network">
+        <network-id>network-layer-network</network-id>
+        <network-types>
+            <nl:network-layer-topology xmlns:nl="urn:ietf:params:xml:ns:yang:network-layer"/>
+        </network-types>
+
+        <nw:supporting-network>
+            <nw:network-ref>device-layer-network</nw:network-ref>
+        </nw:supporting-network>
+
+        <nw:node>
+            <nw:node-id>nuc-supporting</nw:node-id>
+            
+            <nw:supporting-node>
+                <nw:network-ref>device-layer-network</nw:network-ref>
+                <nw:node-ref>nuc-0</nw:node-ref>
+            </nw:supporting-node>
+            
+            <nl:network-layer-node-attributes xmlns:nl="urn:ietf:params:xml:ns:yang:network-layer">
+                <nl:node-name>nuc-control-node</nl:node-name>
+                <nl:node-type>generic</nl:node-type>
+            </nl:network-layer-node-attributes>
+
+            <nt:termination-point xmlns:nt="urn:ietf:params:xml:ns:yang:ietf-network-topology">
+                <nt:tp-id>nuc-0-rj45-0</nt:tp-id>
+                <nt:supporting-termination-point>
+                    <nt:network-ref>device-layer-network</nt:network-ref>
+                    <nt:node-ref>nuc-0</nt:node-ref>
+                    <nt:tp-ref>nuc-0-rj45-0</nt:tp-ref>
+                </nt:supporting-termination-point>
+
+                <nl:network-layer-termination-point-attributes xmlns:nl="urn:ietf:params:xml:ns:yang:network-layer">
+                    <nl:interface-name>nuc-eth</nl:interface-name>
+                    <nl:interface-type>ethernet</nl:interface-type>
+                    <nl:interface-status>up</nl:interface-status>
+                    <nl:mac-address>00:1A:2B:3C:4D:5E</nl:mac-address>
+                </nl:network-layer-termination-point-attributes>
+            </nt:termination-point>
+
+        </nw:node>
+
     </network>
 
 </robot>
