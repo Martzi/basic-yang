@@ -15,6 +15,13 @@
     <!-- import d455 camera -->
     <xacro:include filename="$(find realsense2_description)/urdf/_d455.urdf.xacro" />
 
+    <!-- import usb-cable -->
+    <!-- <xacro:include filename="$(find cable_description)/urdf/usb-cable.urdf.xacro" /> -->
+
+    <!-- import ethernet-cable -->
+    <xacro:include filename="$(find cable_description)/urdf/ethernet-cable.urdf.xacro" />
+
+
     <!-- Device definition in a network -->
     <network>
         <network-id>device-layer-network</network-id>
@@ -30,7 +37,10 @@
             <origin xyz="-0.022 -0.039 -0.01" rpy="0 1.57 0" />
         </xacro:sensor_d455>
 
-        <nt:link xmlns:nt="urn:ietf:params:xml:ns:yang:ietf-network-topology">
+        <!-- instantiate ethernet-cable -->
+        <xacro:eth-cable parent="nuc-0-cat6-0-link" src_node="nuc-0" src_tp="cat6-0" dst_node="d455" dst_tp="usb-typec-0" link_type="usb30" length="2" />
+
+        <!-- <nt:link xmlns:nt="urn:ietf:params:xml:ns:yang:ietf-network-topology">
             <nt:link-id>nuc-0-camera-0-link</nt:link-id>
             
             <nt:source>
@@ -55,7 +65,9 @@
                 <usb:max-power-transfer>15</usb:max-power-transfer>
             </dl:device-layer-link-attributes>
 
-        </nt:link>
+        </nt:link> -->
+
+
     </network>
 
     <network xmlns:nw="urn:ietf:params:xml:ns:yang:ietf-network">
