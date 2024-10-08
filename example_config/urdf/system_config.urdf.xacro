@@ -16,7 +16,7 @@
     <xacro:include filename="$(find realsense2_description)/urdf/_d455.urdf.xacro" />
 
     <!-- import ethernet-cable -->
-    <xacro:include filename="$(find cable_description)/urdf/ethernet-cable.urdf.xacro" />
+    <xacro:include filename="$(find cable_description)/urdf/usb-cable.urdf.xacro" />
 
 
     <!-- Device definition in a network -->
@@ -35,7 +35,7 @@
         </xacro:sensor_d455>
 
         <!-- instantiate ethernet-cable -->
-        <xacro:eth-cable parent="nuc-0-cat6-0-link" src_node="nuc-0" dst_node="d455" src_tp="cat6-0" dst_tp="usb-typec-0" link_type="usb30"/>
+        <xacro:usb-cable parent="nuc-0-cat6-0-link" src_node="nuc-0" dst_node="d455" src_tp="cat6-0" dst_tp="usb-typec-0" link_type="usb30" length="2"/>
 
     </network>
 
