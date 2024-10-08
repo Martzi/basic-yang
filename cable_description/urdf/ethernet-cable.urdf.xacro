@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://wiki.ros.org/xacro"
-       name="eth-cable">
+       name="ethernet-cable">
 
-    <xacro:macro name="eth-cable" params="parent src_node dst_node src_tp dst_tp link_type length">
+    <xacro:macro name="ethernet-cable" params="parent src_node dst_node src_tp dst_tp link_type length">
 
         <joint name="ethernet-cable-joint" type="fixed">
             <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -29,8 +29,6 @@
                 </geometry>
             </collision>
         </link>
-
-        <!-- todo: dugo tipust kivlasztani mesh-bol -->
 
         <nt:link xmlns:nt="urn:ietf:params:xml:ns:yang:ietf-network-topology">
             <nt:link-id>${src_node}-${dst_node}-link</nt:link-id>
