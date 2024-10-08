@@ -39,11 +39,13 @@ def clean_xml(root):
                       '{urn:ietf:params:xml:ns:yang:ietf-network-topology}link',
                       '{urn:ietf:params:xml:ns:yang:ietf-network}node',
                       '{urn:ietf:params:xml:ns:yang:ietf-network}supporting-network',
+                      '{urn:ietf:params:xml:ns:yang:ietf-network}supporting-node',
                       '{urn:ietf:params:xml:ns:yang:device-layer}device-layer-node-attributes',
                       '{urn:ietf:params:xml:ns:yang:network-layer}network-layer-node-attributes',
                       'node-id',
                       'network-id',
-                      'network-types'
+                      'network-types',
+                      'supporting-node'
                       ]
     
     # Remove elements based on the tags list
@@ -80,10 +82,10 @@ def generate_launch_description():
     # Output the cleaned XML with proper formatting
     cleaned_xml = ET.tostring(root, encoding='unicode', method='xml')
 
-    pattern = r"</?(node|network)>"
+    pattern = r"</?(node|network)\s*/?>"
     result = re.sub(pattern, '', cleaned_xml)
 
-    # print("system_description_config: ", result)
+    print("robot_description: ", result)
 
     robot_description = {'robot_description': result}
 
@@ -122,8 +124,8 @@ def generate_launch_description():
 
 
     return LaunchDescription([
-        # DeclareLaunchArgument('data', default_value=system_description_config, description='Data to be published'),
-        # node_system_publisher,
+        DeclareLaunchArgument('data', default_value=system_description_config, description='Data to be published'),
+        node_system_publisher,
         node_robot_state_publisher,
         rviz_node
     ])
