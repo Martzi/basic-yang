@@ -83,7 +83,7 @@ def generate_launch_description():
     pattern = r"</?(node|network)>"
     result = re.sub(pattern, '', cleaned_xml)
 
-    print("system_description_config: ", result)
+    # print("system_description_config: ", result)
 
     robot_description = {'robot_description': result}
 
@@ -115,13 +115,15 @@ def generate_launch_description():
         executable='publisher_node',
         name='publisher_node',
         output='screen',
-        parameters=[{'data': LaunchConfiguration('data')}]
+        parameters=[
+            {'data': LaunchConfiguration('data')}
+            ]
     )
 
 
     return LaunchDescription([
-        DeclareLaunchArgument('data', default_value=system_description_config, description='Data to be published'),
-        node_system_publisher,
+        # DeclareLaunchArgument('data', default_value=system_description_config, description='Data to be published'),
+        # node_system_publisher,
         node_robot_state_publisher,
         rviz_node
     ])
