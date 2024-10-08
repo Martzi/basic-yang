@@ -2,7 +2,7 @@
 <robot xmlns:xacro="http://wiki.ros.org/xacro"
        name="eth-cable">
 
-    <xacro:macro name="eth-cable" params="parent src_node dst_node src_tp dst_tp link_type">
+    <xacro:macro name="eth-cable" params="parent src_node dst_node src_tp dst_tp link_type length">
 
         <joint name="ethernet-cable-joint" type="fixed">
             <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -15,7 +15,7 @@
             <visual>
                 <origin rpy="0 0 0" xyz="0 0 0"/>
                 <geometry>
-                    <cylinder length="2" radius="0.001"/> <!-- measure 3D point distances -->
+                    <cylinder length="${length}" radius="0.001"/> <!-- measure 3D point distances -->
                 </geometry>
                 <material name="Black">
                     <color rgba="0 0 0 1"/>
@@ -25,7 +25,7 @@
             <collision>
                 <origin xyz="0 0 0" rpy="0 0 0"/>
                 <geometry>
-                    <cylinder length="2" radius="0.001"/>
+                    <cylinder length="${length}" radius="0.001"/>
                 </geometry>
             </collision>
         </link>
@@ -49,11 +49,11 @@
                 xmlns:dl="urn:ietf:params:xml:ns:yang:device-layer">
                 <dl:physical-link-name>${src_node}-${dst_node}-cable</dl:physical-link-name>
                 <dl:physical-link-type>${link_type}</dl:physical-link-type>
-                <dl:cable-length>2</dl:cable-length> 
+                <dl:cable-length>${length}</dl:cable-length> 
             </dl:device-layer-link-attributes>
 
         </nt:link>
 
     </xacro:macro>
-    
+
 </robot>

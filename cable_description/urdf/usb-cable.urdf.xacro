@@ -1,13 +1,12 @@
 <?xml version="1.0"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro"
+       name="usb-cable">
 
-<robot name="usb-cable"
-    xmlns:xacro="http://wiki.ros.org/xacro">
-
-    <xacro:macro name="usb-cable" params="parent src_port dst_port length">
+    <xacro:macro name="usb-cable" params="parent src_node dst_node src_tp dst_tp link_type length">
 
         <joint name="usb-cable-joint" type="fixed">
             <origin xyz="0 0 0" rpy="0 0 0"/>
-            <parent link="${src_port}"/>
+            <parent link="${parent}"/>
             <child link="usb-cable-link"/> <!-- kábel csonk -->
         </joint>
 
@@ -31,19 +30,19 @@
             </collision>
         </link>
 
+        <!-- todo: dugo tipust kivlasztani mesh-bol -->
 
-
-        <!-- <nt:link xmlns:nt="urn:ietf:params:xml:ns:yang:ietf-network-topology">
-            <nt:link-id>${src_port}-${dst_port}-link</nt:link-id>
+        <nt:link xmlns:nt="urn:ietf:params:xml:ns:yang:ietf-network-topology">
+            <nt:link-id>${src_node}-${dst_node}-link</nt:link-id>
 
             <nt:source>
-                <nt:source-node>${src_port}</nt:source-node>
-                <nt:source-tp>${src_port}-usb30-${src_port}</nt:source-tp>
+                <nt:source-node>${src_node}</nt:source-node>
+                <nt:source-tp>${src_node}-${src_tp}</nt:source-tp>
             </nt:source>
-
+            
             <nt:destination>
-                <nt:dest-node>${dst_port}</nt:dest-node>
-                <nt:dest-tp>${dst_port}-usb30-${dst_port}</nt:dest-tp>
+                <nt:dest-node>${dst_node}</nt:dest-node>
+                <nt:dest-tp>${dst_node}-${dst_tp}</nt:dest-tp>  
             </nt:destination>
 
             <dl:device-layer-link-attributes
@@ -52,6 +51,13 @@
                 <dl:physical-link-name>usb-cable</dl:physical-link-name>
                 <dl:physical-link-type>usb30</dl:physical-link-type>
                 <dl:cable-length>${length}</dl:cable-length>
-                <usb:source-connector-type       -->
+                <usb:source-connector-type>usb30</usb:source-connector-type>
+                <usb:destination-connector-type>usb30</usb:destination-connector-type>
+                <usb:max-data-transfer>20</usb:max-data-transfer>
+                <usb:max-power-transfer>150</usb:max-power-transfer>
+            </dl:device-layer-link-attributes>
+
+        </nt:link>
+
     </xacro:macro>
 </robot>
