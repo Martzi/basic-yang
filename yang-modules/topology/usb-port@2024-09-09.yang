@@ -55,22 +55,24 @@ module usb-port {
     leaf source-connector-type {
         type string;
         description
-            " ";
+            "Source connector type (e.g., usb20, usb30).";
     }
     leaf destination-connector-type {
         type string;
         description
-            " ";
+            "Destination connector type (e.g., usb20, usb30).";
     }
     leaf max-data-transfer {
         type uint16;
+        units "Gbps";
         description
-            " ";
+            "maximum data transfer rate in Gbps";
     }
     leaf max-power-transfer {
         type uint16;
+        units "W";
         description
-            " ";
+            "maximum power transfer in W";
     }
   }
 }
