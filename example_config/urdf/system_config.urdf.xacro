@@ -15,9 +15,14 @@
     <!-- import d455 camera -->
     <xacro:include filename="$(find realsense2_description)/urdf/_d455.urdf.xacro" />
 
-    <!-- import ethernet-cable -->
+    <!-- import usb-cable -->
     <xacro:include filename="$(find cable_description)/urdf/usb-cable.urdf.xacro" />
 
+    <!-- import ethernet-cable -->
+    <xacro:include filename="$(find cable_description)/urdf/ethernet-cable.urdf.xacro" />
+
+    <!-- import universal robots ur3e -->
+    <xacro:include filename="$(find ur_description)/urdf/ur_macro.xacro" />
 
     <!-- Device definition in a network -->
     <network>
@@ -29,13 +34,26 @@
         <!-- instantiate nuc -->
         <xacro:nuc parent="world" id="0" origin_xyz="-1 1 0"/>
 
+        <!-- instantiate universal robots ur3e -->
+        <xacro:ur_robot 
+            name="ur3e"
+            tf_prefix=""
+            parent="world"
+            joint_limits_parameters_file="$(find ur_description)/config/ur3e/joint_limits.yaml"
+            kinematics_parameters_file="$(find ur_description)/config/ur3e/default_kinematics.yaml"
+            physical_parameters_file="$(find ur_description)/config/ur3e/physical_parameters.yaml"
+            visual_parameters_file="$(find ur_description)/config/ur3e/visual_parameters.yaml">
+            <origin xyz="0 0 0" rpy="0 0 0" />
+        </xacro:ur_robot>
+       
         <!-- instantiate d455 camera -->
         <xacro:sensor_d455 parent="world" id="0">
             <origin xyz="-0.022 -0.039 -0.01" rpy="0 1.57 0" />
         </xacro:sensor_d455>
 
         <!-- instantiate ethernet-cable -->
-        <xacro:usb-cable parent="nuc-0-cat6-0-link" src_node="nuc-0" dst_node="d455" src_tp="cat6-0" dst_tp="usb-typec-0" link_type="usb30" length="2"/>
+        <!-- <xacro:ethernet-cable parent="nuc-0-usb30-0-link" src_node="nuc-0" dst_node="d455" src_tp="usb30-0" dst_tp="usb-typec-0" link_type="usb30" length="2"/> -->
+        <xacro:usb-cable parent="nuc-0-usb30-0-link" src_node="nuc-0" dst_node="d455" src_tp="usb30-0" dst_tp="usb-typec-0" link_type="usb30" length="2"/>
 
     </network>
 
@@ -49,8 +67,8 @@
             <nw:network-ref>device-layer-network</nw:network-ref>
         </nw:supporting-network>
 
-        <nw:node>
-            <nw:node-id>nuc-supporting</nw:node-id>
+        <node>
+            <node-id>nuc-supporting</node-id>
             
             <nw:supporting-node>
                 <nw:network-ref>device-layer-network</nw:network-ref>
@@ -78,7 +96,7 @@
                 </nl:network-layer-termination-point-attributes>
             </nt:termination-point>
 
-        </nw:node>
+        </node>
 
     </network>
 
