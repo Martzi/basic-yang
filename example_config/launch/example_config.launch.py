@@ -37,10 +37,14 @@ def remove_elements_by_tag(root, tag):
 def clean_xml(root):
     tags_to_remove = ['{urn:ietf:params:xml:ns:yang:ietf-network-topology}termination-point', 
                       '{urn:ietf:params:xml:ns:yang:ietf-network-topology}link',
+                      '{urn:ietf:params:xml:ns:yang:ietf-network}node',
+                      '{urn:ietf:params:xml:ns:yang:ietf-network}supporting-network',
                       '{urn:ietf:params:xml:ns:yang:device-layer}device-layer-node-attributes',
+                      '{urn:ietf:params:xml:ns:yang:network-layer}network-layer-node-attributes',
                       'node-id',
                       'network-id',
-                      'network-types']
+                      'network-types'
+                      ]
     
     # Remove elements based on the tags list
     for tag in tags_to_remove:
@@ -79,7 +83,7 @@ def generate_launch_description():
     pattern = r"</?(node|network)>"
     result = re.sub(pattern, '', cleaned_xml)
 
-    # print("system_description_config: ", result)
+    print("system_description_config: ", result)
 
     robot_description = {'robot_description': result}
 
