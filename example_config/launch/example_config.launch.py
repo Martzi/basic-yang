@@ -9,8 +9,6 @@ from launch.substitutions import LaunchConfiguration
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument
 
-
-
 import xml.etree.ElementTree as ET
 
 
@@ -45,7 +43,9 @@ def clean_xml(root):
                       'node-id',
                       'network-id',
                       'network-types',
-                      'supporting-node'
+                      'supporting-node',
+                      'ros2_control',
+                      'ur_ros2_control',
                       ]
     
     # Remove elements based on the tags list
@@ -122,9 +122,14 @@ def generate_launch_description():
             ]
     )
 
+    joint_state_publisher_node = Node(
+        package="joint_state_publisher_gui",
+        executable="joint_state_publisher_gui"
+    )
 
     return LaunchDescription([
         DeclareLaunchArgument('data', default_value=system_description_config, description='Data to be published'),
+        joint_state_publisher_node,
         node_system_publisher,
         node_robot_state_publisher,
         rviz_node
