@@ -91,6 +91,7 @@ def generate_launch_description():
                                                   os.path.join('config', 'example_config_connections.sdf'))
     robot_description_semantic = {'robot_description_semantic': robot_description_semantic_config}
 
+    print("\n robot_description_semantic_config ", robot_description_semantic_config)
 
     # RViz
     rviz_config_file = os.path.join(
@@ -107,7 +108,7 @@ def generate_launch_description():
         package='robot_state_publisher',
         executable='robot_state_publisher',
         output='screen',
-        parameters=[robot_description]
+        parameters=[robot_description, robot_description_semantic]
     )
 
     node_system_publisher = Node(
