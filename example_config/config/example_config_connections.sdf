@@ -1,9 +1,116 @@
 <?xml version="1.0" ?>
 <sdf version="1.4">
 
+    <!-- network layer YANG definitions -->
+    <network xmlns:nw="urn:ietf:params:xml:ns:yang:ietf-network">
+        <network-id>network-layer-network</network-id>
+        <network-types>
+            <nl:network-layer-topology xmlns:nl="urn:ietf:params:xml:ns:yang:network-layer"/>
+        </network-types>
 
-    <yang>
+        <nw:supporting-network>
+            <nw:network-ref>device-layer-network</nw:network-ref>
+        </nw:supporting-network>
 
-    </yang>
+        <node>
+            <node-id>nuc-rj45-node</node-id>
+            
+            <nw:supporting-node>
+                <nw:network-ref>device-layer-network</nw:network-ref>
+                <nw:node-ref>nuc-0</nw:node-ref>
+            </nw:supporting-node>
+            
+            <nl:network-layer-node-attributes xmlns:nl="urn:ietf:params:xml:ns:yang:network-layer">
+                <nl:node-name>nuc-rj45-node</nl:node-name>
+                <nl:node-type>generic</nl:node-type>
+            </nl:network-layer-node-attributes>
+
+            <nt:termination-point xmlns:nt="urn:ietf:params:xml:ns:yang:ietf-network-topology">
+                <nt:tp-id>nuc-0-rj45-0</nt:tp-id>
+                <nt:supporting-termination-point>
+                    <nt:network-ref>device-layer-network</nt:network-ref>
+                    <nt:node-ref>nuc-0</nt:node-ref>
+                    <nt:tp-ref>nuc-0-rj45-0</nt:tp-ref>
+                </nt:supporting-termination-point>
+
+                <nl:network-layer-termination-point-attributes xmlns:nl="urn:ietf:params:xml:ns:yang:network-layer">
+                    <nl:interface-name>nuc-eth</nl:interface-name>
+                    <nl:interface-type>ethernet</nl:interface-type>
+                    <nl:interface-status>up</nl:interface-status>
+                    <nl:mac-address>00:1A:2B:3C:4D:5E</nl:mac-address>
+                </nl:network-layer-termination-point-attributes>
+            </nt:termination-point>
+
+        </node>
+
+        <node>
+            <node-id>nuc-usb-node</node-id>
+            
+            <nw:supporting-node>
+                <nw:network-ref>device-layer-network</nw:network-ref>
+                <nw:node-ref>nuc-0</nw:node-ref>
+            </nw:supporting-node>
+            
+            <nl:network-layer-node-attributes xmlns:nl="urn:ietf:params:xml:ns:yang:network-layer">
+                <nl:node-name>nuc-usb-node</nl:node-name>
+                <nl:node-type>generic</nl:node-type>
+            </nl:network-layer-node-attributes>
+
+            <nt:termination-point xmlns:nt="urn:ietf:params:xml:ns:yang:ietf-network-topology">
+                <nt:tp-id>nuc-0-usb30-0</nt:tp-id>
+                <nt:supporting-termination-point>
+                    <nt:network-ref>device-layer-network</nt:network-ref>
+                    <nt:node-ref>nuc-0</nt:node-ref>
+                    <nt:tp-ref>nuc-0-usb30-0</nt:tp-ref>
+                </nt:supporting-termination-point>
+
+                <nl:network-layer-termination-point-attributes xmlns:nl="urn:ietf:params:xml:ns:yang:network-layer">
+                    <nl:interface-name>nuc-usb</nl:interface-name>
+                    <nl:interface-type>usb</nl:interface-type>
+                    <nl:interface-status>up</nl:interface-status>
+                </nl:network-layer-termination-point-attributes>
+            </nt:termination-point>
+
+        </node>
+
+    </network>
+
+    <!-- application layer YANG definitions -->
+    <network xmlns:nw="urn:ietf:params:xml:ns:yang:ietf-network">
+        <network-id>application-layer-network</network-id>
+        <network-types>
+            <al:application-layer-topology xmlns:al="urn:ietf:params:xml:ns:yang:application-layer"/>
+        </network-types>
+
+        <node>
+            <node-id>robot-control-component</node-id>
+
+            <nw:supporting-node>
+                <nw:network-ref>network-layer-network</nw:network-ref>
+                <nw:node-ref>nuc-rj45-node</nw:node-ref>
+            </nw:supporting-node>
+
+            <al:application-layer-node-attributes xmlns:al="urn:ietf:params:xml:ns:yang:application-layer">
+                <al:component-name>robot-controller</al:component-name>
+                <al:component-type>generic</al:component-type> <!-- vagy vmelyik ros node-->
+            </al:application-layer-node-attributes>
+
+            <nt:termination-point xmlns:nt="urn:ietf:params:xml:ns:yang:ietf-network-topology">
+                <nt:tp-id>valami</nt:tp-id>
+                <nt:supporting-termination-point>
+                    <nt:network-ref>network-layer-network</nt:network-ref>
+                    <nt:node-ref>nuc-usb-node</nt:node-ref>
+                    <nt:tp-ref>nuc-0-usb30-0</nt:tp-ref>
+                </nt:supporting-termination-point>
+
+                <al:application-layer-termination-point-attributes xmlns:al="urn:ietf:params:xml:ns:yang:application-layer">
+                    <al:reference-interface-name>controller</al:reference-interface-name>
+                    <al:reference-interface-type>generic</al:reference-interface-type>
+                </al:application-layer-termination-point-attributes>
+            </nt:termination-point>
+
+        </node>
+
+    </network>
 
 </sdf>
