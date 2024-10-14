@@ -98,6 +98,7 @@ class instance_validator(Node):
             "src/yang-modules/topology/usb-port@2024-09-09.yang",
             "src/yang-modules/topology/device-layer@2024-09-10.yang",
             "src/yang-modules/topology/network-layer@2024-07-24.yang",
+            "src/yang-modules/topology/application-layer@2024-07-24.yang",
             "src/yang-modules/yang_content.xml"
         ]
         result = subprocess.run(command, capture_output=True, text=True)
