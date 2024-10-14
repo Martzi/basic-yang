@@ -44,8 +44,6 @@ def clean_xml(root):
                       'network-id',
                       'network-types',
                       'supporting-node',
-                      'ros2_control',
-                      'ur_ros2_control',
                       ]
     
     # Remove elements based on the tags list

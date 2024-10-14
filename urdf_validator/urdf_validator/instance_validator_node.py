@@ -45,9 +45,11 @@ class instance_validator(Node):
         remove_kinematics_pattern = r'<(link|joint)[^>]*>.*?</\1>'
 
         remove_robot_tags_pattern = r'</?robot[^>]*>'
+        remove_control_tags_pattern = r'<(ros2_control)[^>]*>.*?</\1>'
 
         cleaned_content = re.sub(remove_kinematics_pattern, '', yang_xml_data, flags=re.DOTALL)
         cleaned_content = re.sub(remove_robot_tags_pattern, '', cleaned_content)
+        cleaned_content = re.sub(remove_control_tags_pattern, '', cleaned_content)
         # frame the content tags manually
         cleaned_content = '<?xml version="1.0" ?><networks xmlns="urn:ietf:params:xml:ns:yang:ietf-network">' + cleaned_content
         cleaned_content += '</networks>' # HA kell az első 2 sor akkor ez is 
