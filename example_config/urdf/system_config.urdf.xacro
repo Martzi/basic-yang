@@ -49,7 +49,7 @@
         </xacro:sensor_d455>
 
         <!-- ethernet cable in device layer between nuc and ur controlbox -->
-         <xacro:ethernet-cable parent="nuc-0-cat6-0-link" src_node="nuc-0" dst_node="controlbox" src_tp="cat6-0" dst_tp="cat6-0" link_type="cat6" length="3"/>
+        <xacro:ethernet-cable parent="nuc-0-cat6-0-link" src_node="nuc-0" dst_node="controlbox" src_tp="cat6-0" dst_tp="cat6-0" link_type="cat6" length="3"/>
         
         <!-- USB cable in device layer between nuc and camera-->
         <xacro:usb-cable parent="nuc-0-usb30-0-link" src_node="nuc-0" dst_node="d455" src_tp="usb30-0" dst_tp="usb-typec-0" link_type="usb30" length="2"/>
