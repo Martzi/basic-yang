@@ -1,0 +1,66 @@
+example_config:
+  fromGitRepo: "https://github.com/Martzi/basic-yang.git:main"
+    artifacts:
+      
+      joint_state_publisher:
+        node: "joint_state_publisher_gui"
+        subscribers:
+          robot_description:
+            type: "std_msgs/msg/String"
+        publishers:
+          joint_states:
+            type: "sensor_msgs/msg/JointState"
+          parameter_events:
+            type: "rcl_interfaces/msg/ParameterEvent"
+          rosout:
+            type: "rcl_interfaces/msg/Log"
+
+      publisher_node:
+        node: "publisher_node"
+        subscribers:
+        publishers:
+          parameter_events:
+            type: "rcl_interfaces/msg/ParameterEvent"
+          rosout:
+            type: "rcl_interfaces/msg/Log"
+          system_description:
+            type: "std_msgs/msg/String"
+
+      robot_state_publisher:
+        node: "robot_state_publisher"
+        subscribers:
+          joint_states:
+            type: "sensor_msgs/msg/JointState"
+          parameter_events:
+            type: "rcl_interfaces/msg/ParameterEvent"
+        publishers:
+          parameter_events:
+            type: "rcl_interfaces/msg/ParameterEvent"
+          robot_description:
+            type: "std_msgs/msg/String"
+          rosout:
+            type: "rcl_interfaces/msg/Log"
+          tf:
+            type: "tf2_msgs/msg/TFMessage"
+          tf_static:
+            type: "tf2_msgs/msg/TFMessage"
+
+      rviz2:
+        node: "rviz2"
+        subscribers:
+          parameter_events:
+            type: "rcl_interfaces/msg/ParameterEvent"
+          robot_description:
+            type: "std_msgs/msg/String"
+        publishers:
+          clicked_point:
+            type: "geometry_msgs/msg/PointStamped"
+          goal_pose:
+            type: "geometry_msgs/msg/PoseStamped"
+          initialpose:
+            type: "geometry_msgs/msg/PoseWithCovarianceStamped"
+          parameter_events:
+            type: "rcl_interfaces/msg/ParameterEvent"
+          rosout:
+            type: "rcl_interfaces/msg/Log"
+        
